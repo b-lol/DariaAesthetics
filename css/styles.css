@@ -1,8 +1,15 @@
+:root{
+    --background-color:#f4e8e5;
+    --primary-pink:#EA78B5;
+    --text-color: #49241D;
+}
+
 *{
     margin: 0;
     padding: 0;
-    background-color: #f4e8e5;
-    color: #49241D;
     box-sizing: border-box;
+    background-color:var(--background-color);
+    color:var(--text-color);
+
 }
 
