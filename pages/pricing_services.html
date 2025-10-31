@@ -1,91 +1,225 @@
 <!DOCTYPE html>
 <!-- this is telling the browser its looking at an html file-->
 
-<html lang = "en">
-
-    <head>
-        <meta charset = "UTF-8"> <!-- this is telling which characterset to use-->
-        <!-- this is where the xtra information goes that doesn't show up on the screen but important
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- this is telling which characterset to use-->
+    <!-- this is where the xtra information goes that doesn't show up on the screen but important
         to make sure the stuff goes properly-->
 
-        <link rel="stylesheet" href="../css/styles.css">
-        
-        <title>Services and Pricing</title>
-            <!-- this shows up in the tab and in a google search -->
-    </head>
+    <link rel="stylesheet" href="../css/styles.css" />
 
+    <title>Services and Pricing</title>
+    <!-- this shows up in the tab and in a google search -->
 
-    <body>
-        
-        <ul>
-            <li>Eyebrows</li>
-                <ul>
-                    <li>Price: 20$</li>
-                    <li>Time: 20 mins</li>
-                </ul>
-                
-            <li>1 Face Zone</li>
-                <li>Price: 15$</li>
-                <li>Time: 10 mins</li>
-            <li>Full face</li>
-                <li>Price: 45$</li>
-                <li>Time: 40 mins</li>
-            <li>Eyebrow Tint</li>
-                <li>Price: 20$</li>
-                <li>Time: 30 mins</li>
-            <li>Lash Tint</li>
-                <li>Price: 20$</li>
-                <li>Time: 15 mins</li>
-            <li>Bikini Line</li>
-                <li>Price: 25$</li>
-                <li>Time: 15 mins</li>
-            <li>French Line</li>
-                <li>Price: 40$</li>
-                <li>Time: 20 mins</li>
-            <li>Brazilian</li>
-                <li>Price: 50$</li>
-                <li>Time: 30 mins</li>
-            <li>Between the Cheeks</li>
-                <li>Price: 20$</li>
-                <li>Time: 10 mins</li>
-            <li>Bum Cheeks (includes between cheeks)</li>
-                <li>Price: 35$</li>
-                <li>Time: 15 mins</li>
-            <li>Underarms</li>
-                <li>Price: 20$</li>
-                <li>Time: 10 mins</li>
-            <li>Full Arms</li>
-                <li>Price: 35$</li>
-                <li>Time: 30 mins</li>
-            <li>Half Arms</li>
-                <li>Price: 25$</li>
-                <li>Time: 20 mins</li>
-            <li>Full Legs</li>
-                <li>Price: 70$</li>
-                <li>Time: 50 mins</li>
-            <li>Upper Legs</li>
-                <li>Price: 45$</li>
-                <li>Time: 30 mins</li>
-            <li>Lower Legs</li>
-                <li>Price: 35$</li>
-                <li>Time: 30 mins</li>
-            <li>Inner thigh</li>
-                <li>Price: 20$</li>
-                <li>Time: 15 mins</li>
-            <li>Full Chest</li>
-                <li>Price: 45$</li>
-                <li>Time: 30 mins</li>
-            <li>Half Chest</li>
-                <li>Price: 35$</li>
-                <li>Time: 30 mins</li>
-            <li>Full Back</li>
-                <li>Price: 45$</li>
-                <li>Time: 30 mins</li>
-            <li>Half Back</li>
-                <li>Price: 35$</li>
-                <li>Time: 30 mins</li>
-        </ul>>
-        <p><a href = "../index.html">Home</a></p>
-    </body>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="..//img/favicon_image/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../img/favicon_image/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../img/favicon_image/favicon-16x16.png"
+    />
+    <link rel="manifest" href="site.webmanifest" />
+    <!--This is how I select the favicon in the tabs-->
+  </head>
 
+  <body>
+    <div class="container">
+      <header>
+        <h1>Waxing Services & Pricing</h1>
+      </header>
+
+      <main class="price_container">
+        <!-- Face Services -->
+        <section class="service-category">
+          <h2>Face</h2>
+          <ul class="face-services">
+            <li class="service-item">
+              <span class="service-name">Eyebrows</span>
+              <div class="service-details">
+                <span class="price">$20</span>
+                <span class="time">20 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">1 Face Zone</span>
+              <div class="service-details">
+                <span class="price">$15</span>
+                <span class="time">10 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Full Face</span>
+              <div class="service-details">
+                <span class="price">$45</span>
+                <span class="time">40 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Eyebrow Tint</span>
+              <div class="service-details">
+                <span class="price">$20</span>
+                <span class="time">30 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Lash Tint</span>
+              <div class="service-details">
+                <span class="price">$20</span>
+                <span class="time">15 mins</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Upper Body Services -->
+        <section class="service-category">
+          <h2>Upper Body</h2>
+          <ul class="upper-services">
+            <li class="service-item">
+              <span class="service-name">Underarms</span>
+              <div class="service-details">
+                <span class="price">$20</span>
+                <span class="time">10 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Full Arms</span>
+              <div class="service-details">
+                <span class="price">$35</span>
+                <span class="time">30 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Half Arms</span>
+              <div class="service-details">
+                <span class="price">$25</span>
+                <span class="time">20 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Full Chest</span>
+              <div class="service-details">
+                <span class="price">$45</span>
+                <span class="time">30 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Half Chest</span>
+              <div class="service-details">
+                <span class="price">$35</span>
+                <span class="time">30 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Full Back</span>
+              <div class="service-details">
+                <span class="price">$45</span>
+                <span class="time">30 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Half Back</span>
+              <div class="service-details">
+                <span class="price">$35</span>
+                <span class="time">30 mins</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Lower Body Services -->
+        <section class="service-category">
+          <h2>Lower Body</h2>
+          <ul class="lower-services">
+            <li class="service-item">
+              <span class="service-name">Full Legs</span>
+              <div class="service-details">
+                <span class="price">$70</span>
+                <span class="time">50 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Upper Legs</span>
+              <div class="service-details">
+                <span class="price">$45</span>
+                <span class="time">30 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Lower Legs</span>
+              <div class="service-details">
+                <span class="price">$35</span>
+                <span class="time">30 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Inner Thigh</span>
+              <div class="service-details">
+                <span class="price">$20</span>
+                <span class="time">15 mins</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Intimate Services -->
+        <section class="service-category">
+          <h2>Intimate</h2>
+          <ul class="intimate-services">
+            <li class="service-item">
+              <span class="service-name">Bikini Line</span>
+              <div class="service-details">
+                <span class="price">$25</span>
+                <span class="time">15 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">French Line</span>
+              <div class="service-details">
+                <span class="price">$40</span>
+                <span class="time">20 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Brazilian</span>
+              <div class="service-details">
+                <span class="price">$50</span>
+                <span class="time">30 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name">Between the Cheeks</span>
+              <div class="service-details">
+                <span class="price">$20</span>
+                <span class="time">10 mins</span>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-name"
+                >Bum Cheeks (includes between cheeks)</span
+              >
+              <div class="service-details">
+                <span class="price">$35</span>
+                <span class="time">15 mins</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <p><a href="../index.html">Home</a></p>
+  </body>
 </html>

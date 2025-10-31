@@ -12,11 +12,34 @@
 
 }
 
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.menu span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: var(--text-color);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.menu:hover span {
+  background-color: var(--primary-pink);
+}
+
 .logo{
     font-family: "Updock", cursive;
-    font-weight: 400;
+    font-weight: 500;
     font-style: normal;
-    font-size: 48px;
+    font-size: 52px;
+    color:var(--text-color);
 }
 
 .booking_button{
@@ -25,7 +48,13 @@
     border-width: 3;
     border-style: solid;
     border-color: var(--primary-pink);
+    text-decoration:none;
+    color:var(--text-color);
 
+}
+
+.booking-button:visited{
+    color:var(--text-color);
 }
 
 ul{
