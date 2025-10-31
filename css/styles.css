@@ -8,6 +8,8 @@
 .top_banner{
     display:flex;
     justify-content: space-between;
+    align-items:center;
+
 }
 
 .logo{
@@ -15,6 +17,15 @@
     font-weight: 400;
     font-style: normal;
     font-size: 48px;
+}
+
+.booking_button{
+    text-align: center;
+    padding: 5px;
+    border-width: 3;
+    border-style: solid;
+    border-color: var(--primary-pink);
+
 }
 
 ul{
