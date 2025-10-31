@@ -52,6 +52,8 @@
     border-color: var(--primary-pink);
     text-decoration:none;
     color:var(--text-color);
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size:10px;
 
 }
 
@@ -71,3 +73,6 @@ ul{
 
 }
 
+footer{
+    text-align: center;
+}
