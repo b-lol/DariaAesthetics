@@ -4,7 +4,9 @@
     --text-color: #49241D;
 }
 
-
+.page{
+    margin: 30px;
+}
 .top_banner{
     display:flex;
     justify-content: space-between;
@@ -59,11 +61,6 @@
 
 ul{
     list-style-type:none;
-}
-
-h1{
-    text-align:center;
-
 }
 
 .price_container{
