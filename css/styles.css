@@ -11,6 +11,8 @@
     display:flex;
     justify-content: space-between;
     align-items:center;
+    max-width: 450;
+    position:relative;
 
 }
 
@@ -42,6 +44,9 @@
     font-style: normal;
     font-size: 52px;
     color:var(--text-color);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .booking_button{
@@ -75,4 +80,6 @@ ul{
 
 footer{
     text-align: center;
+    color:var(--text-color);
+    font-size: 6px;
 }
