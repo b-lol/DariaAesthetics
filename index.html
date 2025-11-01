@@ -10,7 +10,8 @@
 
     <link rel="stylesheet" href="css/styles.css">
     <!--this is linking the css style sheet to this document-->
-    
+
+       
     <title>Daria Aesthetics</title>
         <!-- this shows up in the tab and in a google search -->
 
@@ -29,10 +30,20 @@
 <body>
   <div class = "page">
     <div class ="top_banner">
-      <div class ="menu">
+      <div class = "dropdown_container">
+      <button class ="dropdown" onclick="toggleDropdown()">
         <span></span>
         <span></span>
-      <span></span>
+        <span></span>
+      </button>
+      <div class="dropdown-content" id="servicesDropdown">
+        <a href="pages/pricing_services.html">Services and Prices</a>
+        <a href="pages/schedule.html">Schedule</a>
+        <a href="pages/first_visit.html">First Visit</a>
+        <a href="pages/skin_care.html">Skin Care</a>
+        <a href="pages/about.html">About</a>
+        <a href="pages/contact.html">Contact</a>
+    </div>
       </div>
 
       <div class="logo">daria aesthetics</div>
@@ -56,10 +67,12 @@
 
         
    </div>
+   <script src="./js/script.js"></script>
+    <!--this is linking the js file-->
 </body>
 
 <footer>
-  <p>Ukrainian owned and operated. 🇺🇦</p>
+  <!-- <p>Ukrainian owned and operated. 🇺🇦</p> -->
 </footer>
 
 
