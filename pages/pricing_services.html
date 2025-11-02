@@ -34,192 +34,217 @@
     <!--This is how I select the favicon in the tabs-->
   </head>
 
-  <body>
-    <div class="container">
-      <header>
-        <h1>Waxing Services & Pricing</h1>
-      </header>
 
-      <main class="price_container">
-        <!-- Face Services -->
-        <section class="service-category">
-          <h2>Face</h2>
-          <ul class="face-services">
-            <li class="service-item">
-              <span class="service-name">Eyebrows</span>
-              <div class="service-details">
-                <span class="price">$20</span>
-                <span class="time">20 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">1 Face Zone</span>
-              <div class="service-details">
-                <span class="price">$15</span>
-                <span class="time">10 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Full Face</span>
-              <div class="service-details">
-                <span class="price">$45</span>
-                <span class="time">40 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Eyebrow Tint</span>
-              <div class="service-details">
-                <span class="price">$20</span>
-                <span class="time">30 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Lash Tint</span>
-              <div class="service-details">
-                <span class="price">$20</span>
-                <span class="time">15 mins</span>
-              </div>
-            </li>
-          </ul>
-        </section>
+  <head>
+    <meta charset = "UTF-8"> <!-- this is telling which characterset to use-->
+    <!-- this is where the xtra information goes that doesn't show up on the screen but important
+     to make sure the stuff goes properly-->
 
-        <!-- Upper Body Services -->
-        <section class="service-category">
-          <h2>Upper Body</h2>
-          <ul class="upper-services">
-            <li class="service-item">
-              <span class="service-name">Underarms</span>
-              <div class="service-details">
-                <span class="price">$20</span>
-                <span class="time">10 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Full Arms</span>
-              <div class="service-details">
-                <span class="price">$35</span>
-                <span class="time">30 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Half Arms</span>
-              <div class="service-details">
-                <span class="price">$25</span>
-                <span class="time">20 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Full Chest</span>
-              <div class="service-details">
-                <span class="price">$45</span>
-                <span class="time">30 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Half Chest</span>
-              <div class="service-details">
-                <span class="price">$35</span>
-                <span class="time">30 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Full Back</span>
-              <div class="service-details">
-                <span class="price">$45</span>
-                <span class="time">30 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Half Back</span>
-              <div class="service-details">
-                <span class="price">$35</span>
-                <span class="time">30 mins</span>
-              </div>
-            </li>
-          </ul>
-        </section>
+    <link rel="stylesheet" href="../css/styles.css">
+    <!--this is linking the css style sheet to this document-->
 
-        <!-- Lower Body Services -->
-        <section class="service-category">
-          <h2>Lower Body</h2>
-          <ul class="lower-services">
-            <li class="service-item">
-              <span class="service-name">Full Legs</span>
-              <div class="service-details">
-                <span class="price">$70</span>
-                <span class="time">50 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Upper Legs</span>
-              <div class="service-details">
-                <span class="price">$45</span>
-                <span class="time">30 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Lower Legs</span>
-              <div class="service-details">
-                <span class="price">$35</span>
-                <span class="time">30 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Inner Thigh</span>
-              <div class="service-details">
-                <span class="price">$20</span>
-                <span class="time">15 mins</span>
-              </div>
-            </li>
-          </ul>
-        </section>
+       
+    <title>Daria Aesthetics</title>
+        <!-- this shows up in the tab and in a google search -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon_image/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_image/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon_image/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <!--This is how I select the favicon in the tabs-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Updock&display=swap" rel="stylesheet">
+    <!--This is how I pulled font from google fonts there's a corresponding code in my styles sheet-->
+</head>
+
+<body>
+  <div class="page">
+    <div class="top_banner">
+      <div class = "dropdown_container">
+      <button class ="dropdown" onclick="toggleDropdown()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="dropdown-content" id="servicesDropdown">
+        <a href="pages/pricing_services.html">Services and Prices</a>
+        <a href="pages/schedule.html">Schedule</a>
+        <a href="pages/first_visit.html">First Visit</a>
+        <a href="pages/skin_care.html">Skin Care</a>
+        <a href="pages/about.html">About</a>
+        <a href="pages/contact.html">Contact</a>
+    </div>
+      </div>
+
+      <div class="logo">daria aesthetics</div>
+
+      <div class="button_container">
+        <a href="https://book.squareup.com/appointments/m3f3pdzzxv89y4/location/L8YJN97A2A889/services?fbclid=PAb21jcANx-SFleHRuA2FlbQIxMAABpxxA6OyYUd1E3Jr-KQ2EOXSF18-lqARcRTQa-zbOEiDSjn4-EcmyQ1J9XAoI_aem_t0ZKJ7OH0j-WcqFb1MC4Bg" class = "booking_button" target="_blank" rel="noopener">Book My Appointment</a>
+
+        </div> <!--End of top banner-->
+    </div> 
+    <div class="service_container face">
+      <div class="marquee_container">
+          <div class="marquee_content face"> 
+              &hearts;  FACIAL SERVICES  &hearts;  FACIAL SERVICES  &hearts;  FACIAL SERVICES  &hearts;  FACIAL SERVICES  
+          </div> <!-- Closing tag for marquee_content -->
+      </div> <!-- Closing tag for marquee_container -->
+
+      <div class="service_detail_container">
+        <div class = "price_info header">Area
+            <div class ="cost header">Price</div>
+            <div class ="time header">Time</div>
+      </div>
+      <div class = "price_info eyebrows">Eyebrows
+            <div class ="cost eyebrows"> 20 $</div>
+            <div class ="time eyebrows"> 20 mins</div>
+      </div>
+
+      <div class = "price_info 1_face"> 1 Face Zone
+            <div class ="cost eyebrows"> 15 $</div>
+            <div class ="time eyebrows"> 10 mins</div>
+      </div>
+
+      <div class = "price_info full_face">Full Face
+            <div class ="cost eyebrows"> 45 $</div>
+            <div class ="time eyebrows"> 40 mins</div>
+      </div>
+
+      <div class = "price_info brow_tint">Eyebrow Tint
+            <div class ="cost eyebrows"> 20 $</div>
+            <div class ="time eyebrows"> 30 mins</div>
+      </div>
+      <div class = "price_info last_tint">Lash Tint
+            <div class ="cost eyebrows"> 20 $</div>
+            <div class ="time eyebrows"> 15 mins</div>
+      </div>
+
+      </div>
+        
+    </div>
+
+    <div class="service_container upper_body">
+      <div class="marquee_container">
+          <div class="marquee_content upper_body"> 
+              &hearts;  UPPER BODY SERVICES  &hearts;  UPPER BODY SERVICES  &hearts;  UPPER BODY SERVICES  &hearts;  UPPER BODY SERVICES  
+          </div> <!-- Closing tag for marquee_content -->
+      </div> <!-- Closing tag for marquee_container -->
+      <div class="service_detail_container">
+          <div class="price_info header">Area
+              <div class="cost header">Price</div>
+              <div class="time header">Time</div>
+          </div>
+          <div class="price_info underarms">Underarms
+              <div class="cost underarms">20 $</div>
+              <div class="time underarms">10 mins</div>
+          </div>
+          <div class="price_info full_arms">Full Arms
+              <div class="cost full_arms">35 $</div>
+              <div class="time full_arms">30 mins</div>
+          </div>
+          <div class="price_info half_arms">Half Arms
+              <div class="cost half_arms">25 $</div>
+              <div class="time half_arms">20 mins</div>
+          </div>
+          <div class="price_info full_chest">Full Chest
+              <div class="cost full_chest">45 $</div>
+              <div class="time full_chest">30 mins</div>
+          </div>
+          <div class="price_info half_chest">Half Chest
+              <div class="cost half_chest">35 $</div>
+              <div class="time half_chest">30 mins</div>
+          </div>
+          <div class="price_info full_back">Full Back
+              <div class="cost full_back">45 $</div>
+              <div class="time full_back">30 mins</div>
+          </div>
+          <div class="price_info half_back">Half Back
+              <div class="cost half_back">35 $</div>
+              <div class="time half_back">30 mins</div>
+          </div>
+      </div> <!-- Closing tag for service_detail_container -->
+    </div> <!-- Closing tag for service_container -->
+
+    <div class="service_container lower_body">
+      <div class="marquee_container">
+          <div class="marquee_content lower_body"> 
+              &hearts;  LOWER BODY SERVICES  &hearts;  LOWER BODY SERVICES  &hearts;  LOWER BODY SERVICES  &hearts;  LOWER BODY SERVICES  
+          </div> <!-- Closing tag for marquee_content -->
+      </div> <!-- Closing tag for marquee_container -->
+      <div class="service_detail_container">
+          <div class="price_info header">Area
+              <div class="cost header">Price</div>
+              <div class="time header">Time</div>
+          </div>
+          <div class="price_info full_legs">Full Legs
+              <div class="cost full_legs">70 $</div>
+              <div class="time full_legs">50 mins</div>
+          </div>
+          <div class="price_info upper_legs">Upper Legs
+              <div class="cost upper_legs">45 $</div>
+              <div class="time upper_legs">30 mins</div>
+          </div>
+          <div class="price_info lower_legs">Lower Legs
+              <div class="cost lower_legs">35 $</div>
+              <div class="time lower_legs">30 mins</div>
+          </div>
+          <div class="price_info inner_thigh">Inner Thigh
+              <div class="cost inner_thigh">20 $</div>
+              <div class="time inner_thigh">15 mins</div>
+          </div>
+      </div> <!-- Closing tag for service_detail_container -->
+    </div> <!-- Closing tag for service_container -->
+
+    <div class="service_container intimate">
+      <div class="marquee_container">
+          <div class="marquee_content intimate"> 
+              &hearts;  INTIMATE SERVICES  &hearts;  INTIMATE SERVICES  &hearts;  INTIMATE SERVICES  &hearts;  INTIMATE SERVICES  
+          </div> <!-- Closing tag for marquee_content -->
+      </div> <!-- Closing tag for marquee_container -->
+      <div class="service_detail_container">
+          <div class="price_info header">Area
+              <div class="cost header">Price</div>
+              <div class="time header">Time</div>
+          </div>
+          <div class="price_info bikini_line">Bikini Line
+              <div class="cost bikini_line">25 $</div>
+              <div class="time bikini_line">15 mins</div>
+          </div>
+          <div class="price_info french_line">French Line
+              <div class="cost french_line">40 $</div>
+              <div class="time french_line">20 mins</div>
+          </div>
+          <div class="price_info brazilian">Brazilian
+              <div class="cost brazilian">50 $</div>
+              <div class="time brazilian">30 mins</div>
+          </div>
+          <div class="price_info between_cheeks">Between the Cheeks
+              <div class="cost between_cheeks">20 $</div>
+              <div class="time between_cheeks">10 mins</div>
+          </div>
+          <div class="price_info bum_cheeks">Bum Cheeks (includes between cheeks)
+              <div class="cost bum_cheeks">35 $</div>
+              <div class="time bum_cheeks">15 mins</div>
+          </div>
+      </div> <!-- Closing tag for service_detail_container -->
+    </div> <!-- Closing tag for service_container -->
+
+   <script src="../js/script.js"></script>
+    <!--this is linking the js file-->
+</body>
+
+
+
+
+
 
         <!-- Intimate Services -->
-        <section class="service-category">
-          <h2>Intimate</h2>
-          <ul class="intimate-services">
-            <li class="service-item">
-              <span class="service-name">Bikini Line</span>
-              <div class="service-details">
-                <span class="price">$25</span>
-                <span class="time">15 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">French Line</span>
-              <div class="service-details">
-                <span class="price">$40</span>
-                <span class="time">20 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Brazilian</span>
-              <div class="service-details">
-                <span class="price">$50</span>
-                <span class="time">30 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name">Between the Cheeks</span>
-              <div class="service-details">
-                <span class="price">$20</span>
-                <span class="time">10 mins</span>
-              </div>
-            </li>
-            <li class="service-item">
-              <span class="service-name"
-                >Bum Cheeks (includes between cheeks)</span
-              >
-              <div class="service-details">
-                <span class="price">$35</span>
-                <span class="time">15 mins</span>
-              </div>
-            </li>
-          </ul>
-        </section>
+
       </main>
     </div>
 
     <p><a href="../index.html">Home</a></p>
-  </body>
+  </body> -->
 </html>
