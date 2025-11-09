@@ -19,8 +19,8 @@ const SQUARE_APP_SECRET = process.env.SQUARE_APPLICATION_SECRET;
 const DOMAIN = process.env.DOMAIN;
 
 // Debug: Print what DOMAIN contains
-console.log('DOMAIN value:', DOMAIN);
-console.log('Full redirect URI:', `${DOMAIN}/callback`);
+console.log("DOMAIN value:", DOMAIN);
+console.log("Full redirect URI:", `${DOMAIN}/callback`);
 
 //create server
 const server = http.createServer((req, res) => {
@@ -35,7 +35,7 @@ const server = http.createServer((req, res) => {
 
     // Build the Square authorization URL
     const redirectUri = `${DOMAIN}/callback`;
-    const authUrl = `https://connect.squareup.com/oauth2/authorize?client_id=${SQUARE_APP_ID}&scope=MERCHANT_PROFILE_READ+APPOINTMENTS_READ+APPOINTMENTS_ALL_READ&redirect_uri=${encodeURIComponent(
+    const authUrl = `https://connect.squareup.com/oauth2/authorize?client_id=${SQUARE_APP_ID}&scope=MERCHANT_PROFILE_READ+APPOINTMENTS_READ+APPOINTMENTS_ALL_READ+ITEMS_READ&redirect_uri=${encodeURIComponent(
       redirectUri
     )}`;
 
@@ -166,6 +166,525 @@ const server = http.createServer((req, res) => {
     // Send the request with our data
     squareReq.write(tokenData);
     squareReq.end();
+  } else if (url === "/api/availability") {
+    // API endpoint to get availability from Square
+
+    const accessToken = process.env.SQUARE_ACCESS_TOKEN;
+
+    if (!accessToken) {
+      res.writeHead(401, { "Content-Type": "application/json" });
+      res.end(
+        JSON.stringify({
+          error: "No access token found. Please authorize first.",
+        })
+      );
+      return;
+    }
+
+    // Get location ID first
+    const locationsOptions = {
+      hostname: "connect.squareup.com",
+      path: "/v2/locations",
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Square-Version": "2025-07-16",
+        "Content-Type": "application/json",
+      },
+    };
+
+    // Request locations from Square
+    const locationsReq = https.request(locationsOptions, (locationsRes) => {
+      let locationsData = "";
+
+      locationsRes.on("data", (chunk) => {
+        locationsData += chunk;
+      });
+
+      locationsRes.on("end", () => {
+        const locationsResult = JSON.parse(locationsData);
+
+        if (locationsResult.locations && locationsResult.locations.length > 0) {
+          const locationId = locationsResult.locations[0].id;
+          console.log("Location ID:", locationId);
+
+          // Now get services from Catalog API
+          const catalogData = JSON.stringify({
+            object_types: ["ITEM"],
+          });
+
+          const catalogOptions = {
+            hostname: "connect.squareup.com",
+            path: "/v2/catalog/search",
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Square-Version": "2025-07-16",
+              "Content-Type": "application/json",
+              "Content-Length": catalogData.length,
+            },
+          };
+
+          // Request to get services
+          const catalogReq = https.request(catalogOptions, (catalogRes) => {
+            let catalogResponseData = "";
+
+            catalogRes.on("data", (chunk) => {
+              catalogResponseData += chunk;
+            });
+
+            catalogRes.on("end", () => {
+              const catalogResult = JSON.parse(catalogResponseData);
+              
+              console.log("Catalog response:", JSON.stringify(catalogResult, null, 2));
+
+              // Extract service variation IDs
+              const serviceVariationIds = [];
+
+              if (catalogResult.objects) {
+                catalogResult.objects.forEach((item) => {
+                  if (
+                    item.type === "ITEM" &&
+                    item.item_data &&
+                    item.item_data.variations
+                  ) {
+                    item.item_data.variations.forEach((variation) => {
+                      serviceVariationIds.push(variation.id);
+                    });
+                  }
+                });
+              }
+
+              console.log("Found service IDs:", serviceVariationIds);
+
+              if (serviceVariationIds.length === 0) {
+                res.writeHead(404, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "No services found" }));
+                return;
+              }
+
+              // Now search for availability with the service IDs
+              const startDate = new Date();
+              const endDate = new Date();
+              endDate.setDate(endDate.getDate() + 21);
+
+              const availabilityData = JSON.stringify({
+                query: {
+                  filter: {
+                    start_at_range: {
+                      start_at: startDate.toISOString(),
+                      end_at: endDate.toISOString(),
+                    },
+                    location_id: locationId,
+                    segment_filters: serviceVariationIds.map((id) => ({
+                      service_variation_id: id,
+                    })),
+                  },
+                },
+              });
+
+              const availabilityOptions = {
+                hostname: "connect.squareup.com",
+                path: "/v2/bookings/availability/search",
+                method: "POST",
+                headers: {
+                  Authorization: `Bearer ${accessToken}`,
+                  "Square-Version": "2025-07-16",
+                  "Content-Type": "application/json",
+                  "Content-Length": availabilityData.length,
+                },
+              };
+
+              const availabilityReq = https.request(
+                availabilityOptions,
+                (availabilityRes) => {
+                  let availabilityResponseData = "";
+
+                  availabilityRes.on("data", (chunk) => {
+                    availabilityResponseData += chunk;
+                  });
+
+                  availabilityRes.on("end", () => {
+                    // Send the availability data back to the browser
+                    res.writeHead(200, { "Content-Type": "application/json" });
+                    res.end(availabilityResponseData);
+                  });
+                }
+              );
+
+              availabilityReq.on("error", (error) => {
+                console.error("Availability request error:", error);
+                res.writeHead(500, { "Content-Type": "application/json" });
+                res.end(
+                  JSON.stringify({ error: "Error fetching availability" })
+                );
+              });
+
+              availabilityReq.write(availabilityData);
+              availabilityReq.end();
+            });
+          });
+
+          catalogReq.on("error", (error) => {
+            console.error("Catalog request error:", error);
+            res.writeHead(500, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: "Error fetching services" }));
+          });
+
+          catalogReq.write(catalogData);
+          catalogReq.end();
+        } else {
+          res.writeHead(404, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "No locations found" }));
+        }
+      });
+    });
+
+    locationsReq.on("error", (error) => {
+      console.error("Locations request error:", error);
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Error fetching locations" }));
+    });
+
+    locationsReq.end();
+  } else if (url === "/api/bookings") {
+    //API endpoint to get bookings
+    const accessToken = process.env.SQUARE_ACCESS_TOKEN;
+    //checking if we have the access token. If we don't then we get an error message.
+    if (!accessToken) {
+      res.writeHead(401, { "Content-Type": "application / json" });
+      res.end(
+        JSON.stringify({
+          error: "No Access token found. Please authorize first.",
+        })
+      );
+      return;
+    }
+    //Get location ID first
+    //getting location first because square organizes data by location
+    const locationsOptions = {
+      hostname: "connect.squareup.com",
+      //where we are sending the request
+      path: "/v2/locations",
+      //the specific endpoint
+      method: "GET",
+      //this sets that we are asking for data (not sending/updating)
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        //our access token to prove we  have permission
+        "Square-Version": "2025-07-16",
+        //which Squares API we are using
+        "Content-Type": "application/json",
+        //we want JSON type back
+      },
+    };
+
+    //Requesting locations from Square
+    const locationsReq = https.request(locationsOptions, (locationsRes) => {
+      //making an https request using the optiosn we set in the previous method
+      //locationsRes is the callback function that runs when Square responds
+
+      let locationsData = "";
+      //empty string to collect data
+      locationsRes.on("data", (chunk) => {
+        //listening for data
+        locationsData += chunk; //adds each chunk to our string
+      });
+
+      //when all data is received this will run and we will process the data
+      //this will convert the JSON string to a Javascript object
+      locationsRes.on("end", () => {
+        const locationsResult = JSON.parse(locationsData);
+
+        if (locationsResult.locations && locationsResult.locations.length > 0) {
+          const locationId = locationsResult.locations[0].id;
+          console.log("Location ID:", locationId);
+
+          /*
+          Before this line everything was to get the location data
+          */
+
+          // Get bookings for next 21 days
+          const startDate = new Date();
+          //new date gets us todays date
+          const endDate = new Date();
+          endDate.setDate(endDate.getDate() + 31);
+
+          // Build query parameters for bookings
+          const startAtMin = startDate.toISOString();
+          const startAtMax = endDate.toISOString();
+          //toISO converts date to format Square needs
+          const bookingsPath = `/v2/bookings?location_id=${locationId}&start_at_min=${startAtMin}&start_at_max=${startAtMax}`;
+
+          //Here we are configuring the booking request,
+          const bookingsOptions = {
+            hostname: "connect.squareup.com",
+            path: bookingsPath,
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Square-Version": "2025-07-16",
+              "Content-Type": "application/json",
+            },
+          };
+
+          //Here we are making the actual booking request
+          const bookingsReq = https.request(bookingsOptions, (bookingsRes) => {
+            let bookingsResponseData = "";
+
+            bookingsRes.on("data", (chunk) => {
+              bookingsResponseData += chunk;
+            });
+
+            bookingsRes.on("end", () => {
+              // Send the bookings data back to the browser
+              res.writeHead(200, { "Content-Type": "application/json" });
+              res.end(bookingsResponseData);
+            });
+          });
+
+          //this is handling errors that may arise during booking requests
+          bookingsReq.on("error", (error) => {
+            console.error("Bookings request error:", error);
+            res.writeHead(500, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: "Error fetching bookings" }));
+          });
+
+          bookingsReq.end();
+        } else {
+          res.writeHead(404, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "No locations found" }));
+        }
+      });
+    });
+
+    //this is handling errors that may arise during location requests
+    locationsReq.on("error", (error) => {
+      console.error("Locations request error:", error);
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Error fetching locations" }));
+    });
+
+    locationsReq.end();
+  } else if (url === '/api/calendar') {
+  // API endpoint that combines bookings AND availability
+  
+  const accessToken = process.env.SQUARE_ACCESS_TOKEN;
+  
+  if (!accessToken) {
+    res.writeHead(401, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: "No access token found. Please authorize first." }));
+    return;
+  }
+  
+  // We'll store both results here
+  let bookingsData = null;
+  let availabilityData = null;
+  let completedRequests = 0;
+  
+  // Function to check if both requests are done
+  function checkComplete() {
+    completedRequests++;
+    if (completedRequests === 2) {
+      // Both requests complete - send combined response
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({
+        bookings: bookingsData,
+        availability: availabilityData
+      }));
+    }
+  }
+  
+  // Get location ID first (needed for both requests)
+  const locationsOptions = {
+    hostname: "connect.squareup.com",
+    path: "/v2/locations",
+    method: "GET",
+    headers: {
+      "Authorization": `Bearer ${accessToken}`,
+      "Square-Version": "2025-07-16",
+      "Content-Type": "application/json"
+    }
+  };
+  
+  const locationsReq = https.request(locationsOptions, (locationsRes) => {
+    let locationsResponseData = "";
+    
+    locationsRes.on("data", (chunk) => {
+      locationsResponseData += chunk;
+    });
+    
+    locationsRes.on("end", () => {
+      const locationsResult = JSON.parse(locationsResponseData);
+      
+      if (!locationsResult.locations || locationsResult.locations.length === 0) {
+        res.writeHead(404, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "No locations found" }));
+        return;
+      }
+      
+      const locationId = locationsResult.locations[0].id;
+      
+      // Date range for both requests
+      const startDate = new Date();
+      const endDate = new Date();
+      endDate.setDate(endDate.getDate() + 21);
+      
+      // ===== REQUEST 1: GET BOOKINGS =====
+      const startAtMin = startDate.toISOString();
+      const startAtMax = endDate.toISOString();
+      const bookingsPath = `/v2/bookings?location_id=${locationId}&start_at_min=${startAtMin}&start_at_max=${startAtMax}`;
+      
+      const bookingsOptions = {
+        hostname: "connect.squareup.com",
+        path: bookingsPath,
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Square-Version": "2025-07-16",
+          "Content-Type": "application/json"
+        }
+      };
+      
+      const bookingsReq = https.request(bookingsOptions, (bookingsRes) => {
+        let bookingsResponseData = "";
+        
+        bookingsRes.on("data", (chunk) => {
+          bookingsResponseData += chunk;
+        });
+        
+        bookingsRes.on("end", () => {
+          bookingsData = JSON.parse(bookingsResponseData);
+          checkComplete();
+        });
+      });
+      
+      bookingsReq.on("error", (error) => {
+        console.error("Bookings request error:", error);
+        bookingsData = { error: "Error fetching bookings" };
+        checkComplete();
+      });
+      
+      bookingsReq.end();
+      
+      // ===== REQUEST 2: GET AVAILABILITY =====
+      // First get catalog services
+      const catalogData = JSON.stringify({
+        object_types: ["ITEM"]
+      });
+      
+      const catalogOptions = {
+        hostname: "connect.squareup.com",
+        path: "/v2/catalog/search",
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Square-Version": "2025-07-16",
+          "Content-Type": "application/json",
+          "Content-Length": catalogData.length
+        }
+      };
+      
+      const catalogReq = https.request(catalogOptions, (catalogRes) => {
+        let catalogResponseData = "";
+        
+        catalogRes.on("data", (chunk) => {
+          catalogResponseData += chunk;
+        });
+        
+        catalogRes.on("end", () => {
+          const catalogResult = JSON.parse(catalogResponseData);
+          
+          // Extract service variation IDs
+          const serviceVariationIds = [];
+          
+          if (catalogResult.objects) {
+            catalogResult.objects.forEach(item => {
+              if (item.type === "ITEM" && item.item_data && item.item_data.variations) {
+                item.item_data.variations.forEach(variation => {
+                  serviceVariationIds.push(variation.id);
+                });
+              }
+            });
+          }
+          
+          if (serviceVariationIds.length === 0) {
+            availabilityData = { availabilities: [] };
+            checkComplete();
+            return;
+          }
+          
+          // Now search for availability
+          const availabilityRequestData = JSON.stringify({
+            query: {
+              filter: {
+                start_at_range: {
+                  start_at: startDate.toISOString(),
+                  end_at: endDate.toISOString()
+                },
+                location_id: locationId,
+                segment_filters: serviceVariationIds.map(id => ({
+                  service_variation_id: id
+                }))
+              }
+            }
+          });
+          
+          const availabilityOptions = {
+            hostname: "connect.squareup.com",
+            path: "/v2/bookings/availability/search",
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${accessToken}`,
+              "Square-Version": "2025-07-16",
+              "Content-Type": "application/json",
+              "Content-Length": availabilityRequestData.length
+            }
+          };
+          
+          const availabilityReq = https.request(availabilityOptions, (availabilityRes) => {
+            let availabilityResponseData = "";
+            
+            availabilityRes.on("data", (chunk) => {
+              availabilityResponseData += chunk;
+            });
+            
+            availabilityRes.on("end", () => {
+              availabilityData = JSON.parse(availabilityResponseData);
+              checkComplete();
+            });
+          });
+          
+          availabilityReq.on("error", (error) => {
+            console.error("Availability request error:", error);
+            availabilityData = { error: "Error fetching availability" };
+            checkComplete();
+          });
+          
+          availabilityReq.write(availabilityRequestData);
+          availabilityReq.end();
+        });
+      });
+      
+      catalogReq.on("error", (error) => {
+        console.error("Catalog request error:", error);
+        availabilityData = { error: "Error fetching services" };
+        checkComplete();
+      });
+      
+      catalogReq.write(catalogData);
+      catalogReq.end();
+    });
+  });
+  
+  locationsReq.on("error", (error) => {
+    console.error("Locations request error:", error);
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: "Error fetching locations" }));
+  });
+  
+  locationsReq.end(); 
+  
   } else if (url === "/about") {
     // About page
     res.end("This is the About Page!");
