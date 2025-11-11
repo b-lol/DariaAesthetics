@@ -12,17 +12,19 @@
     padding-top:clamp(0px, 5vw, 50px);
     
 }
-.top_banner{
-    display:flex;
-    justify-content: space-between;
-    align-items:center;
-    margin: 30px;
-    position: relative;
-
+.top_banner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    margin: 30px auto;
+    max-width: 1400px;
+    padding: 0px;
+    width: 100%;
 }
 
 .dropdown_container{
     position: relative;
+    justify-self:start;
 }
 
 .dropdown {
@@ -94,11 +96,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position:absolute;
-    left:50%;
-    transform: translateX(-50%);
     margin:25px;
     margin-bottom: clamp(20px, 7vw, 100px);
+    justify-self:center;
 }
 
 
@@ -106,8 +106,13 @@
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: clamp(16px,3vw,36px);
+    font-size: clamp(12px,7vw,38px);
     color:var(--text-color);
+    white-space: nowrap;
+}
+
+.button_container {
+    justify-self: end;
 }
 
 .booking_button{
@@ -116,12 +121,13 @@
     border-width: 3;
     border-style: solid;
     border-color: var(--primary-pink);
-    border-radius:10px;
+    border-radius:15px;
     text-decoration:none;
     color:var(--text-color);
     background-color: white;
     font-family:Georgia, 'Times New Roman', Times, serif;
     font-size: clamp(10px,1.5vw, 14px);
+    white-space:nowrap;
 
 }
 
