@@ -8,8 +8,10 @@
     <!-- this is where the xtra information goes that doesn't show up on the screen but important
      to make sure the stuff goes properly-->
 
-    <link rel="stylesheet" href="../css/styles.css"/>
+    <link rel="stylesheet" href="../css/styles.css" />
     <!--this is linking the css style sheet to this document-->
+    <link rel="stylesheet" href="../css/calendar.css" />
+    <!--this is linking the calendar css style sheet-->
 
     <title>Availability</title>
     <!-- this shows up in the tab and in a google search -->
@@ -53,18 +55,24 @@
             <span></span>
           </button>
           <div class="dropdown-content" id="servicesDropdown">
-        <a href="/index.html">Home</a>
-        <a href="/pages/pricing_services.html">Services and Prices</a>
-        <a href="/pages/training.html">Training</a>
-        <a href="/pages/availability.html">Availability</a>
-        <a href="/pages/first_visit.html">First Visit</a>
-        <a href="/pages/skin_care.html">Skin Care</a>
-        <a href="/pages/about.html">About</a>
-        <a href="/pages/contact.html">Contact</a>
-    </div>
+            <a href="/index.html">Home</a>
+            <a href="/pages/pricing_services.html">Services and Prices</a>
+            <a href="/pages/training.html">Training</a>
+            <a href="/pages/first_visit.html">First Visit</a>
+            <a href="/pages/skin_care.html">Skin Care</a>
+            <a href="/pages/about.html">About</a>
+            <a href="/pages/contact.html">Contact</a>
+          </div>
         </div>
 
-        <div class="logo">Daria Aesthetics</div>
+        <div class="logocontainer">
+          <img
+            src="../img/DAlogo2.png"
+            class="logoImage"
+            alt="DariaAesthetics logo"
+          />
+          <div class="logo">Daria Aesthetics</div>
+        </div>
 
         <div class="button_container">
           <a
@@ -78,17 +86,28 @@
       </div>
       <!--End of top banner-->
 
-    <div class="weekly_schedule"> My studio is open:
-      <ul>
-        <li>Monday - 6:30 pm - 9 pm</li>
-        <li>Tuesday - 10 am - 7 pm</li>
-        <li>Thursday -  6:30 pm - 9pm</li>
-        <li>Saturday - 10 am - 7 pm</li>
-      </ul>
-    </div>
+      <div class="calendar-section">
+        <h2 class="calendar-title">My Availability</h2>
 
+        <div id="calendar-container">
+          <div class="loading">Loading calendar...</div>
+        </div>
+      </div>
+
+      <div class="weekly_schedule" id="studio-schedule" aria-live="polite">
+        <div class="ws-header">
+          <h2 class="ws-title">My studio hours</h2>
+          <span class="ws-badge" id="ws-status">Checking…</span>
+        </div>
+
+        <p class="ws-sub" id="ws-subline"></p>
+
+        <ul class="ws-list" id="ws-list">
+          <!-- filled by JS -->
+        </ul>
+      </div>
     </div>
   </body>
-     <script src="../js/script.js"></script>
-    <!--this is linking the js file-->
+  <script src="../js/script.js"></script>
+  <!--this is linking the js file-->
 </html>
