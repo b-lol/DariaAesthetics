@@ -182,16 +182,7 @@ ul{
     color:var(--text-color)
 }
 
-.weekly_schedule{
-    color:var(--text-color);
-    background-color: var(--box-color);
-    padding:10px;
-    border-color:var(--primary-pink);
-    border-radius: 10px;
-    font-size:12px;
-    width:200px;
-    
-}
+
 
 footer{
     text-align: center;

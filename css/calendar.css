@@ -1,0 +1,272 @@
+:root{
+  --background-color:#f4e8e5;
+  --primary-pink:#EA78B5;
+  --text-color:#49241D;
+  --box-color: rgb(248,222,225);
+
+  /* extras the widget uses */
+  --muted: color-mix(in srgb, var(--text-color) 55%, white); /* fallback: #7b584f */
+  --ok: #2f7d32;   /* “Open now” badge */
+  --warn: #9a3412; /* “Closed” badge */
+}
+/* Calendar Section Styling */
+.calendar-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background: rgb(248, 222, 225);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-title {
+  text-align: center;
+  color: var(--text-color);
+  margin: 0 0 30px 0;
+  font-size: 28px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 18px;
+}
+
+/* Calendar Summary */
+.calendar-summary {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f8f9ff;
+  border-radius: 8px;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.summary-label {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.summary-value {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+/* Month Calendar */
+.calendar-month {
+  margin-bottom: 30px;
+}
+
+.month-header {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-color);
+  text-align: center;
+  padding: 20px;
+  background: #f8f9ff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Calendar Grid */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  background: #e5e7eb;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.day-name {
+  background: var(--text-color);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.calendar-day {
+  background: white;
+  min-height: 100px;
+  padding: 8px;
+  position: relative;
+}
+
+.calendar-day.empty {
+  background: #f9fafb;
+}
+
+.calendar-day.today {
+  background: #fef3c7;
+  border: 2px solid #f59e0b;
+}
+
+.day-number {
+  font-weight: bold;
+  font-size: 16px;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.day-events {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.event-indicator {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.event-indicator.busy {
+  background: var(--text-color);
+  color: white;
+}
+
+.event-indicator.available {
+  background: var(--primary-pink);
+  color: white;
+}
+
+/* Error Styling */
+.error {
+  background: #fee;
+  border: 1px solid #fcc;
+  padding: 20px;
+  border-radius: 5px;
+  color: #c33;
+  text-align: center;
+}
+
+.error h2 {
+  margin-bottom: 10px;
+}
+
+.error p {
+  margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .calendar-grid {
+    gap: 1px;
+  }
+  
+  .calendar-day {
+    min-height: 80px;
+    padding: 4px;
+  }
+  
+  .day-number {
+    font-size: 14px;
+  }
+  
+  .event-indicator {
+    font-size: 9px;
+    padding: 2px 4px;
+  }
+}
+
+weekly_schedule{
+  --muted: color-mix(in srgb, var(--text-color) 55%, white);
+  --ok: #2f7d32;   /* “Open now” badge */
+  --warn: #9a3412; /* “Closed” badge */
+}
+
+.weekly_schedule{
+  color: var(--text-color);
+  background: var(--box-color);
+  border: 1.5px solid var(--primary-pink);
+  border-radius: 12px;
+  padding: clamp(12px, 2.5vw, 28px);
+  font-size: clamp(16px, 3vw, 36px);
+  line-height: 1.25;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.ws-header{
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 16px);
+  justify-content: space-between;
+  margin-bottom: clamp(6px, 1vw, 10px);
+}
+
+.ws-title{
+  font-size: clamp(18px, 3.2vw, 32px);
+  margin: 0;
+}
+
+.ws-badge{
+  font-size: clamp(12px, 2.2vw, 16px);
+  border-radius: 999px;
+  padding: .25em .75em;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+
+.ws-sub{
+  margin: 0 0 clamp(10px, 1.6vw, 16px);
+  color: var(--muted);
+  font-size: clamp(12px, 2.2vw, 16px);
+}
+
+.ws-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: clamp(6px, 1.2vw, 10px);
+  column-gap: clamp(8px, 1.6vw, 16px);
+  align-items: center;
+}
+
+.ws-list li{
+  display: contents; /* lets day/time align in the grid */
+}
+
+.ws-day{
+  font-weight: 600;
+}
+
+.ws-time{
+  justify-self: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.ws-closed{
+  opacity: .5;
+}
+
+/* Status color states */
+.ws-open .ws-badge{ color: var(--ok); }
+.ws-closed .ws-badge{ color: var(--warn); }
+
+/* (Optional) Highlight today’s row — uncomment if desired */
+
+.ws-today .ws-day,
+.ws-today .ws-time{
+  background: color-mix(in srgb, var(--primary-pink) 12%, white);
+  padding: .1em .35em;
+  border-radius: 8px;
+}
