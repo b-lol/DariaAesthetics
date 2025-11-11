@@ -50,8 +50,7 @@ function loadTokens() {
 
 // Load tokens on server start
 const storedTokens = loadTokens();
-let SQUARE_ACCESS_TOKEN =
-  storedTokens?.access_token || process.env.SQUARE;
+let SQUARE_ACCESS_TOKEN = storedTokens?.access_token || process.env.SQUARE;
 let REFRESH_TOKEN = storedTokens?.refresh_token || null;
 let MERCHANT_ID = storedTokens?.merchant_id || process.env.MERCHANT_ID;
 
@@ -771,92 +770,94 @@ const server = http.createServer((req, res) => {
     });
 
     locationsReq.end();
-  } 
-  
-   else if (url === '/api/services') {
-  // API endpoint to get services from Square Catalog
-  
-  const accessToken = SQUARE_ACCESS_TOKEN;
-  
-  if (!accessToken) {
-    res.writeHead(401, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ error: "No access token found. Please authorize first." }));
-    return;
-  }
-  
-  // Search for all items (services) in the catalog
-  const catalogData = JSON.stringify({
-    object_types: ["ITEM"]
-  });
-  
-  const catalogOptions = {
-    hostname: "connect.squareup.com",
-    path: "/v2/catalog/search",
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${accessToken}`,
-      "Square-Version": "2025-07-16",
-      "Content-Type": "application/json",
-      "Content-Length": catalogData.length
+  } else if (url === "/api/services") {
+    // API endpoint to get services from Square Catalog
+
+    const accessToken = SQUARE_ACCESS_TOKEN;
+
+    if (!accessToken) {
+      res.writeHead(401, { "Content-Type": "application/json" });
+      res.end(
+        JSON.stringify({
+          error: "No access token found. Please authorize first.",
+        })
+      );
+      return;
     }
-  };
-  
-  const catalogReq = https.request(catalogOptions, (catalogRes) => {
-    let catalogResponseData = "";
-    
-    catalogRes.on("data", (chunk) => {
-      catalogResponseData += chunk;
+
+    // Search for all items (services) in the catalog
+    const catalogData = JSON.stringify({
+      object_types: ["ITEM"],
     });
-    
-    catalogRes.on("end", () => {
-      const catalogResult = JSON.parse(catalogResponseData);
-      
-      // Process and organize the services
-      const services = [];
-      
-      if (catalogResult.objects) {
-        catalogResult.objects.forEach(item => {
-          if (item.type === "ITEM" && item.item_data) {
-            const itemData = item.item_data;
-            
-            // Get variations (different pricing options)
-            const variations = [];
-            if (itemData.variations) {
-              itemData.variations.forEach(variation => {
-                variations.push({
-                  id: variation.id,
-                  name: variation.item_variation_data.name,
-                  price: variation.item_variation_data.price_money ? 
-                         variation.item_variation_data.price_money.amount / 100 : 0
+
+    const catalogOptions = {
+      hostname: "connect.squareup.com",
+      path: "/v2/catalog/search",
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Square-Version": "2025-07-16",
+        "Content-Type": "application/json",
+        "Content-Length": catalogData.length,
+      },
+    };
+
+    const catalogReq = https.request(catalogOptions, (catalogRes) => {
+      let catalogResponseData = "";
+
+      catalogRes.on("data", (chunk) => {
+        catalogResponseData += chunk;
+      });
+
+      catalogRes.on("end", () => {
+        const catalogResult = JSON.parse(catalogResponseData);
+
+        // Process and organize the services
+        const services = [];
+
+        if (catalogResult.objects) {
+          catalogResult.objects.forEach((item) => {
+            if (item.type === "ITEM" && item.item_data) {
+              const itemData = item.item_data;
+
+              // Get variations (different pricing options)
+              const variations = [];
+              if (itemData.variations) {
+                itemData.variations.forEach((variation) => {
+                  variations.push({
+                    id: variation.id,
+                    name: variation.item_variation_data.name,
+                    price: variation.item_variation_data.price_money
+                      ? variation.item_variation_data.price_money.amount / 100
+                      : 0,
+                  });
                 });
+              }
+
+              services.push({
+                id: item.id,
+                name: itemData.name,
+                description: itemData.description || "",
+                category: itemData.category_id || "uncategorized",
+                variations: variations,
               });
             }
-            
-            services.push({
-              id: item.id,
-              name: itemData.name,
-              description: itemData.description || "",
-              category: itemData.category_id || "uncategorized",
-              variations: variations
-            });
-          }
-        });
-      }
-      
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ services: services }));
+          });
+        }
+
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ services: services }));
+      });
     });
-  });
-  
-  catalogReq.on("error", (error) => {
-    console.error("Catalog request error:", error);
-    res.writeHead(500, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ error: "Error fetching services" }));
-  });
-  
-  catalogReq.write(catalogData);
-  catalogReq.end();
-  
+
+    catalogReq.on("error", (error) => {
+      console.error("Catalog request error:", error);
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Error fetching services" }));
+    });
+
+    catalogReq.write(catalogData);
+    catalogReq.end();
   } else if (url === "/availability") {
     // Serve the availability HTML page
     const filePath = path.join(__dirname, "../pages/availability.html");
@@ -870,6 +871,22 @@ const server = http.createServer((req, res) => {
         res.end(data);
       }
     });
+  } else if (url === '/pricing') {
+  // Serve the pricing HTML page
+  const fs = require('fs');
+  const path = require('path');
+  
+  const filePath = path.join(__dirname, '../pages/pricing_services.html');
+  
+  fs.readFile(filePath, (err, data) => {
+    if (err) {
+      res.writeHead(404, { 'Content-Type': 'text/html' });
+      res.end('File not found');
+    } else {
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      res.end(data);
+    }
+  });
   } else if (
     url.startsWith("/css/") ||
     url.startsWith("/js/") ||
