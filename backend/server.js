@@ -80,7 +80,7 @@ const server = http.createServer((req, res) => {
   const pageRoutes = {
     '/': 'index.html',
     '/index': 'index.html',
-    '/availability': 'availability.html',
+    '/book_now': 'book_now.html',
     '/pricing': 'pricing_services.html',
     '/training': 'training.html',
     '/first_visit': 'first_visit.html',
