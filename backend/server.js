@@ -69,12 +69,25 @@ const server = http.createServer((req, res) => {
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // Handle preflight requests
+    // Handle preflight requests
   if (req.method === "OPTIONS") {
     res.writeHead(200);
     res.end();
     return;
   }
+
+  // Page routes mapping
+  const pageRoutes = {
+    '/': 'index.html',
+    '/index': 'index.html',
+    '/availability': 'availability.html',
+    '/pricing': 'pricing_services.html',
+    '/training': 'training.html',
+    '/first_visit': 'first_visit.html',
+    '/skin_care': 'skin_care.html',
+    '/contact': 'contact.html'
+  };
+
 
   //Get the URL that was requested
   const url = req.url;
@@ -83,52 +96,62 @@ const server = http.createServer((req, res) => {
   //console.log('Someone requested:', req.url);
 
   if (url === "/") {
-    // Home route - Authorization page
+    // Serve your normal homepage
+    const filePath = path.join(__dirname, "../pages/index.html");
 
-    // Build the Square authorization URL
+    fs.readFile(filePath, "utf8", (err, data) => {
+      if (err) {
+        res.writeHead(404, { "Content-Type": "text/html" });
+        res.end("<h1>404 - Page Not Found</h1>");
+      } else {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(data);
+      }
+    });
+  } else if (url === "/connect-square") {
+    // OAuth authorization page (only for admin use)
     const redirectUri = `${DOMAIN}/callback`;
     const authUrl = `https://connect.squareup.com/oauth2/authorize?client_id=${SQUARE_APP_ID}&scope=MERCHANT_PROFILE_READ+APPOINTMENTS_READ+APPOINTMENTS_ALL_READ+ITEMS_READ&redirect_uri=${encodeURIComponent(
       redirectUri
     )}`;
 
-    // Send HTML with authorization button
     res.writeHead(200, { "Content-Type": "text/html" });
     res.end(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>Connect Square Account</title>
-        <style>
-          body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 100px auto;
-            padding: 20px;
-            text-align: center;
-          }
-          .button {
-            background-color: #006aff;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            display: inline-block;
-            margin-top: 20px;
-          }
-          .button:hover {
-            background-color: #0051cc;
-          }
-        </style>
-      </head>
-      <body>
-        <h1>Square Integration Setup</h1>
-        <p>To display your appointment availability, we need to connect to your Square Appointments account.</p>
-        <p>Click the button below to authorize this application.</p>
-        <a href="${authUrl}" class="button">Connect Square Account</a>
-      </body>
-      </html>
-    `);
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Connect Square Account</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          max-width: 600px;
+          margin: 100px auto;
+          padding: 20px;
+          text-align: center;
+        }
+        .button {
+          background-color: #006aff;
+          color: white;
+          padding: 15px 30px;
+          text-decoration: none;
+          border-radius: 5px;
+          font-size: 16px;
+          display: inline-block;
+          margin-top: 20px;
+        }
+        .button:hover {
+          background-color: #0051cc;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>Square Integration Setup</h1>
+      <p>To display your appointment availability, we need to connect to your Square Appointments account.</p>
+      <p>Click the button below to authorize this application.</p>
+      <a href="${authUrl}" class="button">Connect Square Account</a>
+    </body>
+    </html>
+  `);
   } else if (url.startsWith("/callback")) {
     // URL looks like: /callback?code=ABC123&state=xyz
     const urlParts = url.split("?");
@@ -858,11 +881,11 @@ const server = http.createServer((req, res) => {
 
     catalogReq.write(catalogData);
     catalogReq.end();
-  } else if (url === "/availability") {
-    // Serve the availability HTML page
-    const filePath = path.join(__dirname, "../pages/availability.html");
-
-    fs.readFile(filePath, (err, data) => {
+  } else if (pageRoutes[url]) {
+    // Page routing - serves HTML pages
+    const filePath = path.join(__dirname, "../pages", pageRoutes[url]);
+    
+    fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
         res.writeHead(404, { "Content-Type": "text/html" });
         res.end("<h1>404 - Page Not Found</h1>");
@@ -871,22 +894,20 @@ const server = http.createServer((req, res) => {
         res.end(data);
       }
     });
-  } else if (url === '/pricing') {
-  // Serve the pricing HTML page
-  const fs = require('fs');
-  const path = require('path');
-  
-  const filePath = path.join(__dirname, '../pages/pricing_services.html');
-  
-  fs.readFile(filePath, (err, data) => {
-    if (err) {
-      res.writeHead(404, { 'Content-Type': 'text/html' });
-      res.end('File not found');
-    } else {
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.end(data);
-    }
-  });
+  } else if (url.startsWith("/components/")) {
+    // ... your existing components code ...else if (url.startsWith("/components/")) {
+    // Serve component files
+    const filePath = path.join(__dirname, "..", url);
+    
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        res.writeHead(404, { "Content-Type": "text/html" });
+        res.end("Component not found");
+      } else {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(data);
+      }
+    });
   } else if (
     url.startsWith("/css/") ||
     url.startsWith("/js/") ||
