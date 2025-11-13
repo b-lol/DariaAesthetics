@@ -3,7 +3,7 @@
 // Fetch calendar data from our API
 async function loadCalendar() {
   try {
-    const response = await fetch("http://localhost:3000/api/calendar");
+    const response = await fetch("/api/calendar");
     const data = await response.json();
 
     console.log("Calendar data:", data);

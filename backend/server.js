@@ -28,6 +28,12 @@ function saveTokens(tokens) {
   try {
     fs.writeFileSync(TOKENS_FILE, JSON.stringify(tokens, null, 2));
     console.log("✅ Tokens saved to tokens.json");
+    console.log("\n⚠️  IMPORTANT FOR RAILWAY DEPLOYMENT:");
+    console.log("If running on Railway, you must manually update these environment variables:");
+    console.log("  SQUARE_ACCESS_TOKEN =", tokens.access_token);
+    console.log("  SQUARE_REFRESH_TOKEN =", tokens.refresh_token);
+    console.log("  MERCHANT_ID =", tokens.merchant_id);
+    console.log("Otherwise tokens will be lost on server restart!\n");
   } catch (error) {
     console.error("❌ Error saving tokens:", error);
   }
@@ -49,32 +55,19 @@ function loadTokens() {
 }
 
 // Load tokens on server start
+// Priority: 1) Environment variables (secure), 2) tokens.json (fallback for local dev)
 const storedTokens = loadTokens();
-let SQUARE_ACCESS_TOKEN = storedTokens?.access_token || process.env.SQUARE;
-let REFRESH_TOKEN = storedTokens?.refresh_token || null;
-let MERCHANT_ID = storedTokens?.merchant_id || process.env.MERCHANT_ID;
+let SQUARE_ACCESS_TOKEN = process.env.SQUARE_ACCESS_TOKEN || storedTokens?.access_token || null;
+let REFRESH_TOKEN = process.env.SQUARE_REFRESH_TOKEN || storedTokens?.refresh_token || null;
+let MERCHANT_ID = process.env.MERCHANT_ID || storedTokens?.merchant_id || null;
 
 console.log("DOMAIN value:", DOMAIN);
 console.log("Full redirect URI:", `${DOMAIN}/callback`);
 console.log("Access token loaded:", SQUARE_ACCESS_TOKEN ? "✅ Yes" : "❌ No");
-
-// Debug: Print what DOMAIN contains
-console.log("DOMAIN value:", DOMAIN);
-console.log("Full redirect URI:", `${DOMAIN}/callback`);
+console.log("Token source:", process.env.SQUARE_ACCESS_TOKEN ? "Environment variables (secure)" : "tokens.json (local dev)");
 
 //create server
 const server = http.createServer((req, res) => {
-  // Add CORS headers to allow requests from any origin
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-    // Handle preflight requests
-  if (req.method === "OPTIONS") {
-    res.writeHead(200);
-    res.end();
-    return;
-  }
 
   // Page routes mapping
   const pageRoutes = {

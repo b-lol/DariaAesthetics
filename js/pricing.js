@@ -33,7 +33,7 @@ async function loadServices() {
   const containerEl = document.getElementById('services-container');
   
   try {
-    const response = await fetch('http://localhost:3000/api/services');
+    const response = await fetch('/api/services');
     const data = await response.json();
     
     if (data.error) {
