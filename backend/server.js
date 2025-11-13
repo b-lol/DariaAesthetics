@@ -19,6 +19,7 @@ const path = require("path"); //used to work with file paths
 const SQUARE_APP_ID = process.env.SQUARE_APPLICATION_ID;
 const SQUARE_APP_SECRET = process.env.SQUARE_APPLICATION_SECRET;
 const DOMAIN = process.env.DOMAIN;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD
 
 //Path to store tokens
 const TOKENS_FILE = path.join(__dirname, "tokens.json");
@@ -101,8 +102,76 @@ const server = http.createServer((req, res) => {
         res.end(data);
       }
     });
-  } else if (url === "/connect-square") {
+  } else if (url.startsWith("/connect-square")) {
     // OAuth authorization page (only for admin use)
+    // Password protection
+    // Parse query parameters manually
+    const urlParts = url.split('?');
+    let providedPassword = null;
+    
+    if (urlParts.length > 1) {
+      const params = new URLSearchParams(urlParts[1]);
+      providedPassword = params.get('password');
+    }
+
+    // Check if password is correct
+    if (providedPassword !== ADMIN_PASSWORD) {
+      res.writeHead(401, { "Content-Type": "text/html" });
+      res.end(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Access Denied</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              max-width: 600px;
+              margin: 100px auto;
+              padding: 20px;
+              text-align: center;
+            }
+            .error {
+              color: #d32f2f;
+              margin: 20px 0;
+            }
+            input {
+              padding: 10px;
+              font-size: 16px;
+              border: 2px solid #ddd;
+              border-radius: 5px;
+              width: 200px;
+              margin: 10px;
+            }
+            button {
+              background-color: #006aff;
+              color: white;
+              padding: 12px 30px;
+              border: none;
+              border-radius: 5px;
+              font-size: 16px;
+              cursor: pointer;
+            }
+            button:hover {
+              background-color: #0051cc;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Admin Access Required</h1>
+          ${providedPassword ? '<p class="error">❌ Incorrect password. Please try again.</p>' : '<p>Enter the admin password to continue.</p>'}
+          
+          <form method="GET" action="/connect-square">
+            <input type="password" name="password" placeholder="Enter password" required autofocus>
+            <br>
+            <button type="submit">Submit</button>
+          </form>
+        </body>
+        </html>
+      `);
+      return;
+    }
+
+    // Password is correct - show Square authorization page
     const redirectUri = `${DOMAIN}/callback`;
     const authUrl = `https://connect.squareup.com/oauth2/authorize?client_id=${SQUARE_APP_ID}&scope=MERCHANT_PROFILE_READ+APPOINTMENTS_READ+APPOINTMENTS_ALL_READ+ITEMS_READ&redirect_uri=${encodeURIComponent(
       redirectUri
