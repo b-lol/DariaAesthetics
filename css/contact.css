@@ -153,3 +153,100 @@ body {
     color: var(--text-color);
     line-height: 2;
 }
+
+/* Weekly Schedule Widget Styles */
+:root {
+  --muted: color-mix(in srgb, var(--text-color) 55%, white);
+  --ok: #2f7d32;   /* "Open now" badge */
+  --warn: #9a3412; /* "Closed" badge */
+}
+
+weekly_schedule {
+  --muted: color-mix(in srgb, var(--text-color) 55%, white);
+  --ok: #2f7d32;
+  --warn: #9a3412;
+}
+
+.weekly_schedule {
+  color: var(--text-color);
+  background: var(--background-color);
+  border: 1.5px solid var(--text-color);
+  border-radius: 12px;
+  padding: clamp(12px, 2.5vw, 28px);
+  font-size: clamp(16px, 3vw, 36px);
+  line-height: 1.25;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.ws-header {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 16px);
+  justify-content: space-between;
+  margin-bottom: clamp(6px, 1vw, 10px);
+}
+
+.ws-title {
+  font-size: clamp(18px, 3.2vw, 32px);
+  margin: 0;
+}
+
+.ws-badge {
+  font-size: clamp(12px, 2.2vw, 16px);
+  border-radius: 999px;
+  padding: .25em .75em;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+
+.ws-sub {
+  margin: 0 0 clamp(10px, 1.6vw, 16px);
+  color: var(--muted);
+  font-size: clamp(12px, 2.2vw, 16px);
+}
+
+.ws-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: clamp(6px, 1.2vw, 10px);
+  column-gap: clamp(8px, 1.6vw, 16px);
+  align-items: center;
+}
+
+.ws-list li {
+  display: contents; /* lets day/time align in the grid */
+}
+
+.ws-day {
+  font-weight: 600;
+}
+
+.ws-time {
+  justify-self: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.ws-closed {
+  opacity: .5;
+}
+
+/* Status color states */
+.ws-open .ws-badge { 
+  color: var(--ok); 
+}
+
+.ws-closed .ws-badge { 
+  color: var(--warn); 
+}
+
+/* Highlight today's row */
+.ws-today .ws-day,
+.ws-today .ws-time {
+  background: color-mix(in srgb, var(--text-color) 12%, white);
+  padding: .1em .35em;
+  border-radius: 8px;
+}
