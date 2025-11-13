@@ -15,7 +15,7 @@ body {
 /* Headers with responsive sizing */
 h1, .aftercare_title {
     font-family: "Montserrat", sans-serif;
-    font-size: clamp(28px, 6vw, 36px);
+    font-size: clamp(28px, 6vw, 42px);
     color: var(--text-color);
     text-align: center;
     margin-bottom: 30px;
@@ -62,30 +62,27 @@ h6 {
 
 .content_container {
     max-width: 900px;
-    margin: clamp(20px, 5vw, 40px) auto;
-    padding: 0 clamp(15px, 3vw, 20px);
+    margin: 40px auto;
+    padding: 0 20px;
 }
-
 
 .intro_text {
     background-color: var(--background-color);
-    padding: clamp(15px, 3vw, 20px);
-    border-radius: clamp(8px, 1.5vw, 10px);
-    margin-bottom: clamp(20px, 4vw, 30px);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
     text-align: center;
 }
 
 .intro_text p {
     font-size: clamp(15px, 2vw, 17px);
-    line-height: 1.6;
 }
-
 
 .instruction_box {
     background-color: white;
     border-left: 4px solid var(--text-color);
-    padding: clamp(12px, 2.5vw, 15px) clamp(15px, 3vw, 20px);
-    margin-bottom: clamp(12px, 2.5vw, 15px);
+    padding: 15px 20px;
+    margin-bottom: 15px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
@@ -95,12 +92,11 @@ h6 {
 .instruction_box span,
 .instruction_box div {
     font-size: clamp(14px, 1.8vw, 16px);
-    line-height: 1.6;
 }
 
 .instruction_box strong {
     color: var(--text-color);
-    font-size: clamp(15px, 2vw, 16px);
+    font-size: 16px;
     font-weight: 700;
 }
 
@@ -112,16 +108,15 @@ strong {
 .warning_box {
     background-color: #fff5f5;
     border: 2px solid var(--text-color);
-    padding: clamp(15px, 3vw, 20px);
-    border-radius: clamp(8px, 1.5vw, 10px);
-    margin: clamp(20px, 4vw, 30px) 0;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 30px 0;
 }
 
 .warning_box p,
 .warning_box li,
 .warning_box span {
     font-size: clamp(14px, 1.8vw, 16px);
-    line-height: 1.6;
 }
 
 .warning_box h3 {
@@ -129,22 +124,18 @@ strong {
     margin-top: 0;
     font-family: "Montserrat", sans-serif;
     font-size: clamp(20px, 3.8vw, 24px);
-    margin-bottom: 15px;
 }
-
 
 .tip_box {
     background-color: white;
-    padding: clamp(15px, 3vw, 20px);
-    border-radius: clamp(8px, 1.5vw, 10px);
-    margin: clamp(20px, 4vw, 30px) 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 30px 0;
 }
 
 .tip_box p,
 .tip_box li {
     font-size: clamp(14px, 1.8vw, 16px);
-    line-height: 1.6;
 }
 
 .tip_box h3 {
@@ -152,7 +143,6 @@ strong {
     margin-top: 0;
     font-family: "Montserrat", sans-serif;
     font-size: clamp(20px, 3.8vw, 24px);
-    margin-bottom: 15px;
 }
 
 ul {
@@ -193,9 +183,9 @@ a {
     text-decoration: underline;
 }
 
-/* .booking_button {
+.booking_button {
     display: inline-block;
-    padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 24px);
+    padding: 12px 24px;
     background-color: var(--text-color);
     color: white;
     text-decoration: none;
@@ -203,11 +193,8 @@ a {
     font-weight: 600;
     font-size: clamp(15px, 2.2vw, 18px);
     transition: background-color 0.3s;
-    text-align: center;
 }
 
 .booking_button:hover {
     background-color: color-mix(in srgb, var(--text-color) 80%, black);
-} */
-
-
+}

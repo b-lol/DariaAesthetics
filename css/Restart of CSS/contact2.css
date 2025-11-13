@@ -8,8 +8,8 @@ body {
 
 .contact_container {
     max-width: 1000px;
-    margin: clamp(20px, 5vw, 40px) auto;
-    padding: 0 clamp(15px, 3vw, 20px);
+    margin: 40px auto;
+    padding: 0 20px;
     background-color: white;
 }
 
@@ -26,22 +26,21 @@ body {
     text-align: center;
     font-size: clamp(14px, 2vw, 18px);
     color: var(--text-color);
-    margin-bottom: clamp(30px, 6vw, 50px);
+    margin-bottom: 50px;
     line-height: 1.6;
-    padding: 0 10px;
 }
 
 .contact_grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: clamp(20px, 4vw, 30px);
-    margin-bottom: clamp(30px, 6vw, 50px);
+    gap: 30px;
+    margin-bottom: 50px;
 }
 
 .contact_card {
     background-color: var(--background-color);
-    padding: clamp(20px, 4vw, 30px);
-    border-radius: clamp(12px, 2vw, 15px);
+    padding: 30px;
+    border-radius: 15px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -49,9 +48,8 @@ body {
 
 .contact_card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 15px rgba(234, 120, 181, 0.3);
 }
-
 
 .contact_card_icon {
     font-size: clamp(32px, 5vw, 48px);
@@ -85,27 +83,25 @@ body {
 
 .social_link {
     display: inline-block;
-    padding: clamp(10px, 2vw, 12px) clamp(24px, 4vw, 30px);
+    padding: 12px 30px;
     background-color: var(--text-color);
     color: white;
     text-decoration: none;
     border-radius: 25px;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
-    font-size: clamp(14px, 2vw, 16px);
     transition: background-color 0.3s ease, transform 0.3s ease;
     margin-top: 10px;
 }
 
 .social_link:hover {
-    background-color: color-mix(in srgb, var(--text-color) 80%, black);
+    background-color:var(--text-color);
     transform: scale(1.05);
 }
 
-
 .map_section {
-    margin-top: clamp(30px, 6vw, 50px);
-    margin-bottom: clamp(30px, 6vw, 50px);
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .map_title {
@@ -123,7 +119,7 @@ body {
     padding-bottom: 56.25%; /* 16:9 aspect ratio */
     height: 0;
     overflow: hidden;
-    border-radius: clamp(10px, 2vw, 15px);
+    border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
@@ -136,15 +132,13 @@ body {
     border: 0;
 }
 
-
 .hours_section {
     background-color: var(--background-color);
-    padding: clamp(25px, 5vw, 40px);
-    border-radius: clamp(12px, 2vw, 15px);
-    margin-top: clamp(30px, 6vw, 50px);
+    padding: 40px;
+    border-radius: 15px;
+    margin-top: 50px;
     text-align: center;
 }
-
 
 .hours_title {
     font-family: "Montserrat", sans-serif;
@@ -177,8 +171,8 @@ weekly_schedule {
   color: var(--text-color);
   background: var(--background-color);
   border: 1.5px solid var(--text-color);
-  border-radius: clamp(10px, 2vw, 12px);
-  padding: clamp(16px, 3vw, 28px);
+  border-radius: 12px;
+  padding: clamp(12px, 2.5vw, 28px);
   font-size: clamp(16px, 3vw, 36px);
   line-height: 1.25;
   max-width: 720px;
@@ -188,20 +182,18 @@ weekly_schedule {
 .ws-header {
   display: flex;
   align-items: center;
-  gap: clamp(8px, 1.5vw, 16px);
+  gap: clamp(8px, 1vw, 16px);
   justify-content: space-between;
-  margin-bottom: clamp(8px, 1.5vw, 10px);
-  flex-wrap: wrap;
+  margin-bottom: clamp(6px, 1vw, 10px);
 }
 
 .ws-title {
-  font-size: clamp(20px, 3.5vw, 32px);
+  font-size: clamp(18px, 3.2vw, 32px);
   margin: 0;
-  line-height: 1.2;
 }
 
 .ws-badge {
-  font-size: clamp(13px, 2.5vw, 16px);
+  font-size: clamp(12px, 2.2vw, 16px);
   border-radius: 999px;
   padding: .25em .75em;
   border: 1px solid currentColor;
@@ -209,9 +201,9 @@ weekly_schedule {
 }
 
 .ws-sub {
-  margin: 0 0 clamp(12px, 2vw, 16px);
+  margin: 0 0 clamp(10px, 1.6vw, 16px);
   color: var(--muted);
-  font-size: clamp(13px, 2.5vw, 16px);
+  font-size: clamp(12px, 2.2vw, 16px);
 }
 
 .ws-list {
@@ -220,8 +212,8 @@ weekly_schedule {
   padding: 0;
   display: grid;
   grid-template-columns: 1fr auto;
-  row-gap: clamp(8px, 1.5vw, 10px);
-  column-gap: clamp(12px, 2vw, 16px);
+  row-gap: clamp(6px, 1.2vw, 10px);
+  column-gap: clamp(8px, 1.6vw, 16px);
   align-items: center;
 }
 
@@ -231,13 +223,11 @@ weekly_schedule {
 
 .ws-day {
   font-weight: 600;
-  font-size: clamp(14px, 2.2vw, 16px);
 }
 
 .ws-time {
   justify-self: end;
   font-variant-numeric: tabular-nums;
-  font-size: clamp(14px, 2.2vw, 16px);
 }
 
 .ws-closed {
@@ -260,22 +250,3 @@ weekly_schedule {
   padding: .1em .35em;
   border-radius: 8px;
 }
-
-/* Mobile: Stack header elements if needed */
-  
-  .ws-header {
-    gap: 10px;
-  }
-  
-  .ws-title {
-    font-size: 22px;
-  }
-  
-  .ws-badge {
-    font-size: 13px;
-  }
-  
-  .ws-list {
-    row-gap: 10px;
-    column-gap: 12px;
-  }

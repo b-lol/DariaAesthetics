@@ -1,6 +1,6 @@
 :root{
   --background-color:#f4e8e5;
-  
+  --primary-pink:#EA78B5;
   --text-color:#49241D;
   --box-color: rgb(248,222,225);
 
@@ -12,30 +12,18 @@
 /* Calendar Section Styling */
 .calendar-section {
   max-width: 1200px;
-  margin: clamp(20px, 5vw, 40px) auto;
-  padding: clamp(15px, 4vw, 30px);
+  margin: 40px auto;
+  padding: 30px;
   background: var(--background-color);
-  border-radius: clamp(8px, 1.5vw, 10px);
+  border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Mobile: Reduce padding and margins */
-}
-
 }
 
 .calendar-title {
   text-align: center;
   color: var(--text-color);
-  margin: 0 0 clamp(20px, 4vw, 30px) 0;
-  font-size: clamp(22px, 4vw, 28px);
-  line-height: 1.3;
-}
-
-/* Tablet: Medium title */
-}
-
-/* Mobile: Smaller title */
+  margin: 0 0 30px 0;
+  font-size: 28px;
 }
 
 .loading {
@@ -49,18 +37,11 @@
 .calendar-summary {
   display: flex;
   justify-content: center;
-  gap: clamp(20px, 5vw, 40px);
-  margin-bottom: clamp(20px, 4vw, 30px);
-  padding: clamp(15px, 3vw, 20px);
+  gap: 40px;
+  margin-bottom: 30px;
+  padding: 20px;
   background: #f8f9ff;
   border-radius: 8px;
-  flex-wrap: wrap;
-}
-
-/* Tablet: Adjust spacing */
-}
-
-/* Mobile: Stack vertically or closer spacing */
 }
 
 .summary-item {
@@ -77,12 +58,9 @@
 }
 
 .summary-value {
-  font-size: clamp(22px, 4vw, 28px);
+  font-size: 28px;
   font-weight: bold;
   color: var(--text-color);
-}
-
-/* Mobile: Slightly smaller */
 }
 
 /* Month Calendar */
@@ -91,21 +69,14 @@
 }
 
 .month-header {
-  font-size: clamp(20px, 3.5vw, 24px);
+  font-size: 24px;
   font-weight: bold;
   color: var(--text-color);
   text-align: center;
-  padding: clamp(15px, 3vw, 20px);
+  padding: 20px;
   background: #f8f9ff;
   border-radius: 8px;
-  margin-bottom: clamp(15px, 3vw, 20px);
-  line-height: 1.3;
-}
-
-/* Tablet: Medium size */
-}
-
-/* Mobile: Compact header */
+  margin-bottom: 20px;
 }
 
 /* Calendar Grid */
@@ -193,46 +164,19 @@
   margin: 5px 0;
 }
 
-/* Responsive Design - Comprehensive Breakpoints */
-
-/* Calendar Grid Responsive Adjustments */
-  
-  .day-name {
-    padding: 12px;
-    font-size: 13px;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .calendar-grid {
+    gap: 1px;
   }
-}
-
   
   .calendar-day {
     min-height: 80px;
-    padding: 6px;
-  }
-  
-  .day-number {
-    font-size: 14px;
-  }
-  
-  .event-indicator {
-    font-size: 10px;
-    padding: 3px 5px;
-  }
-  
-  .week-navigation {
-    flex-direction: column;
-    gap: 10px;
-  }
-}
-
-  
-  .calendar-day {
-    min-height: 70px;
     padding: 4px;
   }
   
   .day-number {
-    font-size: 12px;
-    margin-bottom: 4px;
+    font-size: 14px;
   }
   
   .event-indicator {
@@ -244,14 +188,7 @@
 /* Week View Styles */
 .week-view {
   max-width: 1400px;
-  margin: clamp(15px, 3vw, 20px) auto;
-  padding: 0 clamp(10px, 2vw, 20px);
-}
-
-/* Tablet: Add side padding */
-}
-
-/* Mobile: Minimal margins */
+  margin: 20px auto;
 }
 
 .week-navigation {
@@ -262,51 +199,31 @@
 }
 
 .nav-button {
-  padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 24px);
-  font-size: clamp(14px, 2vw, 16px);
+  padding: 12px 24px;
+  font-size: 16px;
   background-color: var(--text-color);
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
-  min-width: 120px;
 }
 
 .nav-button:hover {
   background-color: color-mix(in srgb, var(--text-color) 80%, black);
 }
 
-/* Mobile: Full width buttons in stacked layout */
-}
-
 .days-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: clamp(8px, 1.5vw, 10px);
-}
-
-/* Large Desktop: 7 columns */
-}
-
-/* Desktop to Large Tablet: 5 columns */
-}
-
-/* Tablet: 3 columns */
-}
-
-/* Large Mobile: 2 columns */
-}
-
-/* Small Mobile: 1 column */
+  gap: 10px;
 }
 
 .day-column {
   background: white;
   border: 1px solid var(--text-color);
-  border-radius: clamp(6px, 1vw, 8px);
+  border-radius: 8px;
   overflow: hidden;
-  min-height: 300px;
 }
 
 .day-column.today {
@@ -314,43 +231,31 @@
   box-shadow: 0 0 10px rgba(73, 36, 29, 0.3);
 }
 
-/* Mobile: Adjust minimum height */
-}
-
-}
-
 .day-header {
   background: var(--text-color);
-  padding: clamp(8px, 1.5vw, 10px);
+  padding: 10px;
   text-align: center;
   border-bottom: 2px solid var(--text-color);
 }
 
 .day-name {
   font-weight: bold;
-  font-size: clamp(12px, 1.8vw, 14px);
+  font-size: 14px;
   color: white;
   text-transform: uppercase;
   margin-top: 3px;
 }
 
 .day-date {
-  font-size: clamp(16px, 2.5vw, 18px);
+  font-size: 18px;
   font-weight: 600;
   color: white;
   margin-bottom: 0;
 }
 
-/* Mobile: Slightly smaller text */
-  
-  .day-date {
-    font-size: 16px;
-  }
-}
-
 
 .time-slots {
-  padding: clamp(8px, 1.5vw, 10px);
+  padding: 10px;
   max-height: 500px;
   overflow-y: auto;
 }
@@ -359,11 +264,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: clamp(6px, 1.2vw, 8px) clamp(8px, 1.5vw, 10px);
+  padding: 8px 10px;
   margin-bottom: 5px;
   border-radius: 5px;
-  font-size: clamp(12px, 1.8vw, 13px);
-  gap: 10px;
+  font-size: 13px;
 }
 
 .time-slot.available {
@@ -381,14 +285,9 @@
   color: #999;
 }
 
-/* Mobile: Better touch scrolling and sizing */
-  
-  .time-slot {
-    padding: 8px;
-    font-size: 12px;
-  }
-}
-
+.time-slot.unavailable {
+  background-color: #f8f9fa;
+  color: #999;
 }
 
 /* Studio Closed Styling */
@@ -397,25 +296,24 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(40px, 8vw, 60px) clamp(15px, 3vw, 20px);
+  padding: 60px 20px;
   background-color: #e9ecef;
   border-radius: 8px;
   margin: 10px;
 }
 
 .closed-icon {
-  font-size: clamp(36px, 6vw, 48px);
+  font-size: 48px;
   margin-bottom: 15px;
   opacity: 0.5;
 }
 
 .closed-text {
-  font-size: clamp(14px, 2.5vw, 18px);
+  font-size: 18px;
   font-weight: 600;
   color: #6c757d;
   text-transform: uppercase;
   letter-spacing: 1px;
-  text-align: center;
 }
 
 /* Grey out the entire day column when closed */
@@ -434,17 +332,6 @@
   color: white;
 }
 
-/* Mobile: Adjust closed styling */
-  
-  .closed-icon {
-    font-size: 32px;
-  }
-  
-  .closed-text {
-    font-size: 14px;
-  }
-}
-
 .time-label {
   font-weight: 500;
   color: var(--text-color);
@@ -454,4 +341,31 @@
   font-size: 11px;
   text-transform: uppercase;
   font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .days-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .days-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .week-navigation {
+    flex-direction: column;
+  }
+  
+  .nav-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .days-grid {
+    grid-template-columns: 1fr;
+  }
 }

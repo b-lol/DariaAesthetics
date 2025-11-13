@@ -15,7 +15,7 @@ body {
 /* Headers with responsive sizing */
 h1, .aftercare_title {
     font-family: "Montserrat", sans-serif;
-    font-size: clamp(28px, 6vw, 36px);
+    font-size: clamp(28px, 6vw, 42px);
     color: var(--text-color);
     text-align: center;
     margin-bottom: 30px;
@@ -66,6 +66,20 @@ h6 {
     padding: 0 clamp(15px, 3vw, 20px);
 }
 
+/* Tablet: Medium padding */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .content_container {
+        padding: 0 20px;
+    }
+}
+
+/* Mobile: Tighter spacing */
+@media (max-width: 480px) {
+    .content_container {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+}
 
 .intro_text {
     background-color: var(--background-color);
@@ -80,6 +94,13 @@ h6 {
     line-height: 1.6;
 }
 
+/* Mobile: Adjust text alignment and spacing */
+@media (max-width: 480px) {
+    .intro_text {
+        padding: 18px 15px;
+        margin-bottom: 25px;
+    }
+}
 
 .instruction_box {
     background-color: white;
@@ -102,6 +123,14 @@ h6 {
     color: var(--text-color);
     font-size: clamp(15px, 2vw, 16px);
     font-weight: 700;
+}
+
+/* Mobile: Consistent padding */
+@media (max-width: 480px) {
+    .instruction_box {
+        padding: 12px 15px;
+        margin-bottom: 12px;
+    }
 }
 
 /* Only strong tags NOT in instruction boxes can scale */
@@ -132,6 +161,13 @@ strong {
     margin-bottom: 15px;
 }
 
+/* Mobile: Adjust spacing */
+@media (max-width: 480px) {
+    .warning_box {
+        padding: 18px 15px;
+        margin: 20px 0;
+    }
+}
 
 .tip_box {
     background-color: white;
@@ -153,6 +189,14 @@ strong {
     font-family: "Montserrat", sans-serif;
     font-size: clamp(20px, 3.8vw, 24px);
     margin-bottom: 15px;
+}
+
+/* Mobile: Adjust padding */
+@media (max-width: 480px) {
+    .tip_box {
+        padding: 18px 15px;
+        margin: 20px 0;
+    }
 }
 
 ul {
@@ -193,7 +237,7 @@ a {
     text-decoration: underline;
 }
 
-/* .booking_button {
+.booking_button {
     display: inline-block;
     padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 24px);
     background-color: var(--text-color);
@@ -208,6 +252,15 @@ a {
 
 .booking_button:hover {
     background-color: color-mix(in srgb, var(--text-color) 80%, black);
-} */
+}
 
-
+/* Mobile: Better touch target */
+@media (max-width: 480px) {
+    .booking_button {
+        padding: 12px 24px;
+        font-size: 16px;
+        min-width: 160px;
+        display: block;
+        margin: 10px auto;
+    }
+}

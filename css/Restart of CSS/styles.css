@@ -5,6 +5,7 @@
 
 :root{
     --background-color:#f4e8e5;
+    --primary-pink:#EA78B5;
     --text-color: #49241D;
     --box-color:rgb(248, 222, 225);
     
@@ -42,20 +43,52 @@ img {
     gap: 10px;
 }
 
+/* Mobile: Stack elements vertically */
+@media (max-width: 480px) {
+    .top_banner {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 15px;
+        margin: 10px auto;
+    }
+    
+    .dropdown_container {
+        justify-self: start;
+        order: 1;
+    }
+    
+    .logocontainer {
+        justify-self: center;
+        order: 2;
+        margin: 10px;
+    }
+    
+    .button_container {
+        justify-self: center;
+        order: 3;
+    }
+}
+
 .dropdown_container{
     position: relative;
     justify-self:start;
     font-family: "Montserrat", sans-serif;
-    z-index: 1001;
-    margin-left: clamp(30px, 5vw, 90px); 
+    z-index: 1001; /* Ensures dropdown appears above other content */
+}
+
+/* Mobile adjustments for dropdown */
+@media (max-width: 480px) {
+    .dropdown_container {
+        width: 100%;
+    }
 }
 
 .dropdown {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: clamp(32px, 3.5vw, 60px);
-  height: clamp(24px, 2.5vw, 36px);
+  width: clamp(28px, 3.5vw, 40px);
+  height: clamp(16px, 2.5vw, 24px);
   cursor: pointer;
   background: none;
   border: none;
@@ -84,6 +117,14 @@ img {
     left: 0;
 }
 
+/* Mobile: Full width dropdown on small screens */
+@media (max-width: 480px) {
+    .dropdown-content {
+        min-width: 250px;
+        max-width: 90vw;
+    }
+}
+
 .dropdown-content.show{
     display:block;
 }
@@ -109,6 +150,22 @@ img {
     margin: 5px;
 }
 
+/* Mobile: Larger logo on small screens */
+@media (max-width: 480px) {
+    .logoImage {
+        width: 50%;
+        max-width: 150px;
+    }
+}
+
+/* Tablet: Medium logo size */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .logoImage {
+        width: 35%;
+        max-width: 180px;
+    }
+}
+
 .heroimage {
     width:100%;
     height:auto;
@@ -126,12 +183,20 @@ img {
     justify-self:center;
 }
 
+/* Mobile: Reduce margins */
+@media (max-width: 480px) {
+    .logocontainer {
+        margin: 10px;
+        margin-bottom: 20px;
+    }
+}
+
 
 .logo{
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: clamp(18px,7vw,42px);
+    font-size: clamp(12px,7vw,42px);
     color:var(--text-color);
     white-space: nowrap;
 }
@@ -145,7 +210,7 @@ img {
     padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2.5vw, 20px);
     border-width: 0;
     border-style: solid;
-    border-color: var(--text-color);
+    border-color: var(--primary-pink);
     border-radius:15px;
     text-decoration:none;
     color:white;
@@ -153,14 +218,19 @@ img {
     font-family: "Montserrat", sans-serif;
     font-size: clamp(12px, 1.5vw, 16px);
     font-weight:600;
-    white-space:normal;
+    white-space:nowrap;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    min-width: 80px;
 }
 
-.booking_button:hover {
-    background-color: color-mix(in srgb, var(--text-color) 80%, black);
+
+/* Mobile: Slightly larger button for easier tapping */
+@media (max-width: 480px) {
+    .booking_button {
+        padding: 10px 16px;
+        font-size: 14px;
+        min-width: 120px;
+    }
 }
 
 .booking-button:visited{
@@ -181,6 +251,23 @@ ul{
     flex-wrap: wrap;
 }
 
+/* Mobile: Stack vertically */
+@media (max-width: 768px) {
+    .service_detail_container {
+        flex-direction: column;
+        gap: 15px;
+        margin: 15px;
+    }
+}
+
+/* Tablet: Allow wrapping but maintain row layout */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .service_detail_container {
+        gap: 20px;
+        padding: 0 20px;
+    }
+}
+
 .header{
     font-weight:bold
 }
@@ -195,6 +282,24 @@ ul{
     border-radius: 8px;
     flex-wrap: wrap;
 }
+
+/* Mobile: Stack vertically for readability */
+@media (max-width: 768px) {
+    .price_info {
+        flex-direction: column;
+        gap: 10px;
+        margin: 15px;
+        padding: 20px;
+    }
+}
+
+/* Tablet: Maintain horizontal but with better spacing */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .price_info {
+        padding: 20px;
+    }
+}
+
 
 /* Footer Styles */
 footer {
@@ -241,4 +346,33 @@ footer {
 .footer-bottom p {
   font-size: clamp(12px, 1.5vw, 14px);
   color: #999;
+}
+
+/* Mobile - stacks on mobile */
+@media (max-width: 768px) {
+  footer {
+    padding: 30px 20px;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 25px;
+  }
+  
+  .footer-section {
+    min-width: 100%;
+  }
+}
+
+/* Tablet - 2 columns layout */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .footer-content {
+    justify-content: space-between;
+  }
+  
+  .footer-section {
+    flex: 1 1 45%;
+    min-width: 45%;
+  }
 }

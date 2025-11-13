@@ -1,0 +1,354 @@
+/* Pricing Page Styles */
+
+.services-main {
+  max-width: 1400px;
+  margin: clamp(20px, 5vw, 40px) auto;
+  padding: clamp(15px, 3vw, 20px);
+  width: 100%;
+}
+
+/* Mobile: Reduce margins and padding */
+@media (max-width: 480px) {
+  .services-main {
+    margin: 15px auto;
+    padding: 10px;
+  }
+}
+
+.loading {
+  text-align: center;
+  padding: clamp(40px, 8vw, 60px);
+  font-size: clamp(16px, 2vw, 18px);
+  color: #666;
+}
+
+/* Mobile: Adjust loading padding */
+@media (max-width: 480px) {
+  .loading {
+    padding: 40px 20px;
+  }
+}
+
+.error-message {
+  background: #fee;
+  border: 2px solid #fcc;
+  padding: clamp(20px, 4vw, 30px);
+  border-radius: 10px;
+  color: #c33;
+  text-align: center;
+  margin: clamp(20px, 5vw, 40px);
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+/* Mobile: Better error message display */
+@media (max-width: 480px) {
+  .error-message {
+    margin: 20px 10px;
+    padding: 20px 15px;
+  }
+}
+
+/* Category Section */
+.service-category {
+  margin-bottom: clamp(40px, 8vw, 60px);
+}
+
+/* Mobile: Reduce category spacing */
+@media (max-width: 480px) {
+  .service-category {
+    margin-bottom: 30px;
+  }
+}
+
+.category-title {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: bold;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: clamp(20px, 4vw, 30px);
+  padding-bottom: clamp(10px, 2vw, 15px);
+  border-bottom: 3px solid var(--text-color);
+  line-height: 1.3;
+}
+
+/* Tablet: Medium title size */
+@media (min-width: 481px) and (max-width: 900px) {
+  .category-title {
+    font-size: 26px;
+  }
+}
+
+/* Mobile: Smaller title */
+@media (max-width: 480px) {
+  .category-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom-width: 2px;
+  }
+}
+
+/* Two Column Layout */
+.services-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 800px;
+  margin: clamp(20px, 4vw, 30px) auto 0;
+  gap: clamp(20px, 4vw, 30px);
+}
+
+/* Desktop: Could support 2 columns if needed in future */
+@media (min-width: 1200px) {
+  .services-columns {
+    max-width: 900px;
+  }
+}
+
+/* Tablet: Optimize spacing */
+@media (min-width: 601px) and (max-width: 900px) {
+  .services-columns {
+    max-width: 700px;
+    gap: 25px;
+  }
+}
+
+/* Mobile: Tight layout */
+@media (max-width: 600px) {
+  .services-columns {
+    margin: 20px auto 0;
+    gap: 20px;
+  }
+}
+
+.services-column {
+  background: var(--background-color);
+  padding: clamp(20px, 4vw, 30px);
+  border-radius: clamp(8px, 1.5vw, 12px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.services-column:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Tablet: Medium padding */
+@media (min-width: 601px) and (max-width: 900px) {
+  .services-column {
+    padding: 25px;
+  }
+}
+
+/* Mobile: Compact padding */
+@media (max-width: 600px) {
+  .services-column {
+    padding: 20px 15px;
+    border-radius: 8px;
+  }
+}
+
+.column-header {
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: clamp(15px, 3vw, 25px);
+  padding-bottom: clamp(8px, 1.5vw, 10px);
+  border-bottom: 2px solid var(--text-color);
+  line-height: 1.3;
+}
+
+/* Tablet: Medium header */
+@media (min-width: 601px) and (max-width: 900px) {
+  .column-header {
+    font-size: 20px;
+  }
+}
+
+/* Mobile: Smaller header */
+@media (max-width: 600px) {
+  .column-header {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+}
+
+/* Service Item */
+.service-item {
+  margin-bottom: clamp(15px, 3vw, 25px);
+  padding-bottom: clamp(12px, 2.5vw, 20px);
+  border-bottom: 1px solid rgba(73, 36, 29, 0.15);
+  transition: background-color 0.2s ease;
+}
+
+.service-item:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.service-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Mobile: Tighter spacing */
+@media (max-width: 600px) {
+  .service-item {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+  }
+}
+
+.service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+  gap: clamp(10px, 2vw, 15px);
+  flex-wrap: wrap;
+}
+
+/* Tablet: Keep horizontal but allow wrapping */
+@media (min-width: 601px) and (max-width: 900px) {
+  .service-header {
+    gap: 12px;
+  }
+}
+
+/* Mobile: Stack vertically for easier reading */
+@media (max-width: 600px) {
+  .service-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+}
+
+.service-name {
+  font-size: clamp(16px, 1.5vw, 27px);
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+/* Tablet: Medium font size */
+@media (min-width: 601px) and (max-width: 900px) {
+  .service-name {
+    font-size: 17px;
+  }
+}
+
+/* Mobile: Consistent sizing */
+@media (max-width: 600px) {
+  .service-name {
+    font-size: 16px;
+  }
+}
+
+.service-price {
+  font-size: clamp(18px, 2.2vw, 20px);
+  font-weight: 700;
+  color: var(--text-color);
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+/* Tablet: Medium price size */
+@media (min-width: 601px) and (max-width: 900px) {
+  .service-price {
+    font-size: 17px;
+  }
+}
+
+/* Mobile: Prominent price display */
+@media (max-width: 600px) {
+  .service-price {
+    font-size: 17px;
+    font-weight: 700;
+  }
+}
+
+.service-description {
+  font-size: clamp(13px, 1.5vw, 18px);
+  color: color-mix(in srgb, var(--text-color) 70%, white);
+  line-height: 1.6;
+  margin-top: 8px;
+  max-width: 100%;
+}
+
+/* Tablet: Optimize line length */
+@media (min-width: 601px) and (max-width: 900px) {
+  .service-description {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+/* Mobile: Better readability */
+@media (max-width: 600px) {
+  .service-description {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 6px;
+  }
+}
+
+/* Responsive Design - Comprehensive Breakpoints */
+
+/* Large Tablets and Small Desktops (901px - 1200px) */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .services-main {
+    padding: 20px 30px;
+  }
+  
+  .services-columns {
+    max-width: 850px;
+  }
+}
+
+/* Tablets (601px - 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+  .services-main {
+    padding: 20px;
+  }
+  
+  .services-columns {
+    max-width: 700px;
+  }
+}
+
+/* Large Mobile (481px - 600px) */
+@media (min-width: 481px) and (max-width: 600px) {
+  .services-main {
+    padding: 15px;
+  }
+  
+  .services-column {
+    padding: 22px 18px;
+  }
+}
+
+/* Small Mobile (max 480px) */
+@media (max-width: 480px) {
+  .services-main {
+    padding: 10px;
+    margin: 15px auto;
+  }
+  
+  .services-column {
+    padding: 18px 15px;
+  }
+  
+  .category-title {
+    font-size: 20px;
+  }
+  
+  .column-header {
+    font-size: 18px;
+  }
+}

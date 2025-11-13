@@ -1,0 +1,147 @@
+/* Pricing Page Styles */
+
+.services-main {
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px;
+  font-size: 18px;
+  color: #666;
+}
+
+.error-message {
+  background: #fee;
+  border: 2px solid #fcc;
+  padding: 30px;
+  border-radius: 10px;
+  color: #c33;
+  text-align: center;
+  margin: 40px;
+}
+
+/* Category Section */
+.service-category {
+  margin-bottom: 60px;
+}
+
+.category-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid var(--text-color);
+}
+
+/* Two Column Layout */
+.services-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 800px;
+  margin: 30px auto 0;
+}
+
+.services-column {
+  background: var(--background-color);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.column-header {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--text-color);
+}
+
+/* Service Item */
+.service-item {
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(73, 36, 29, 0.15);
+}
+
+.service-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.service-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.service-price {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-color);
+  white-space: nowrap;
+}
+
+.service-description {
+  font-size: 14px;
+  color: color-mix(in srgb, var(--text-color) 70%, white);
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .services-columns {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .category-title {
+    font-size: 26px;
+  }
+  
+  .column-header {
+    font-size: 20px;
+  }
+  
+  .service-name {
+    font-size: 16px;
+  }
+  
+  .service-price {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .services-main {
+    padding: 10px;
+  }
+  
+  .services-column {
+    padding: 20px;
+  }
+  
+  .category-title {
+    font-size: 22px;
+  }
+  
+  .service-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}

@@ -1,6 +1,6 @@
 :root{
   --background-color:#f4e8e5;
-  
+  --primary-pink:#EA78B5;
   --text-color:#49241D;
   --box-color: rgb(248,222,225);
 
@@ -20,8 +20,18 @@
 }
 
 /* Mobile: Reduce padding and margins */
+@media (max-width: 768px) {
+  .calendar-section {
+    margin: 20px 10px;
+    padding: 20px 15px;
+  }
 }
 
+@media (max-width: 480px) {
+  .calendar-section {
+    margin: 15px 5px;
+    padding: 15px 10px;
+  }
 }
 
 .calendar-title {
@@ -33,9 +43,18 @@
 }
 
 /* Tablet: Medium title */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .calendar-title {
+    font-size: 24px;
+  }
 }
 
 /* Mobile: Smaller title */
+@media (max-width: 480px) {
+  .calendar-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
 }
 
 .loading {
@@ -58,9 +77,19 @@
 }
 
 /* Tablet: Adjust spacing */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .calendar-summary {
+    gap: 30px;
+    padding: 18px;
+  }
 }
 
 /* Mobile: Stack vertically or closer spacing */
+@media (max-width: 480px) {
+  .calendar-summary {
+    gap: 15px;
+    padding: 15px;
+  }
 }
 
 .summary-item {
@@ -83,6 +112,10 @@
 }
 
 /* Mobile: Slightly smaller */
+@media (max-width: 480px) {
+  .summary-value {
+    font-size: 24px;
+  }
 }
 
 /* Month Calendar */
@@ -103,9 +136,18 @@
 }
 
 /* Tablet: Medium size */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .month-header {
+    font-size: 22px;
+  }
 }
 
 /* Mobile: Compact header */
+@media (max-width: 480px) {
+  .month-header {
+    font-size: 18px;
+    padding: 12px;
+  }
 }
 
 /* Calendar Grid */
@@ -196,6 +238,10 @@
 /* Responsive Design - Comprehensive Breakpoints */
 
 /* Calendar Grid Responsive Adjustments */
+@media (max-width: 1024px) {
+  .calendar-grid {
+    gap: 2px;
+  }
   
   .day-name {
     padding: 12px;
@@ -203,6 +249,10 @@
   }
 }
 
+@media (max-width: 768px) {
+  .calendar-grid {
+    gap: 1px;
+  }
   
   .calendar-day {
     min-height: 80px;
@@ -224,6 +274,10 @@
   }
 }
 
+@media (max-width: 480px) {
+  .calendar-grid {
+    gap: 1px;
+  }
   
   .calendar-day {
     min-height: 70px;
@@ -249,9 +303,18 @@
 }
 
 /* Tablet: Add side padding */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .week-view {
+    padding: 0 15px;
+  }
 }
 
 /* Mobile: Minimal margins */
+@media (max-width: 480px) {
+  .week-view {
+    margin: 10px auto;
+    padding: 0 10px;
+  }
 }
 
 .week-navigation {
@@ -278,6 +341,12 @@
 }
 
 /* Mobile: Full width buttons in stacked layout */
+@media (max-width: 480px) {
+  .nav-button {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 15px;
+  }
 }
 
 .days-grid {
@@ -287,18 +356,41 @@
 }
 
 /* Large Desktop: 7 columns */
+@media (min-width: 1400px) {
+  .days-grid {
+    gap: 12px;
+  }
 }
 
 /* Desktop to Large Tablet: 5 columns */
+@media (min-width: 1025px) and (max-width: 1399px) {
+  .days-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 
 /* Tablet: 3 columns */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .days-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
 }
 
 /* Large Mobile: 2 columns */
+@media (min-width: 481px) and (max-width: 768px) {
+  .days-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
 }
 
 /* Small Mobile: 1 column */
+@media (max-width: 480px) {
+  .days-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
 }
 
 .day-column {
@@ -315,8 +407,16 @@
 }
 
 /* Mobile: Adjust minimum height */
+@media (max-width: 768px) {
+  .day-column {
+    min-height: 250px;
+  }
 }
 
+@media (max-width: 480px) {
+  .day-column {
+    min-height: 200px;
+  }
 }
 
 .day-header {
@@ -342,6 +442,10 @@
 }
 
 /* Mobile: Slightly smaller text */
+@media (max-width: 480px) {
+  .day-name {
+    font-size: 12px;
+  }
   
   .day-date {
     font-size: 16px;
@@ -382,6 +486,11 @@
 }
 
 /* Mobile: Better touch scrolling and sizing */
+@media (max-width: 768px) {
+  .time-slots {
+    max-height: 400px;
+    padding: 8px;
+  }
   
   .time-slot {
     padding: 8px;
@@ -389,6 +498,10 @@
   }
 }
 
+@media (max-width: 480px) {
+  .time-slots {
+    max-height: 350px;
+  }
 }
 
 /* Studio Closed Styling */
@@ -435,6 +548,10 @@
 }
 
 /* Mobile: Adjust closed styling */
+@media (max-width: 480px) {
+  .studio-closed {
+    padding: 40px 15px;
+  }
   
   .closed-icon {
     font-size: 32px;
