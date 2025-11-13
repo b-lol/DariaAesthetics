@@ -41,9 +41,9 @@
 /* Two Column Layout */
 .services-columns {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  margin-top: 30px;
+  grid-template-columns: 1fr;
+  max-width: 800px;
+  margin: 30px auto 0;
 }
 
 .services-column {

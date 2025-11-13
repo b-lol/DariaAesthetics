@@ -107,12 +107,7 @@ function renderServices(services) {
         <h2 class="category-title">${category}</h2>
         <div class="services-columns">
           <div class="services-column">
-            <h3 class="column-header">For Women</h3>
-            ${renderServiceList(categoryServices, 'women')}
-          </div>
-          <div class="services-column">
-            <h3 class="column-header">For Men</h3>
-            ${renderServiceList(categoryServices, 'men')}
+            ${renderServiceList(categoryServices)}
           </div>
         </div>
       </div>
@@ -122,18 +117,12 @@ function renderServices(services) {
   containerEl.innerHTML = html;
 }
 
-// Render a list of services for a specific gender
-function renderServiceList(services, gender) {
+// Render a list of services
+function renderServiceList(services) {
   let html = '';
   
   services.forEach(service => {
-    // Skip women-only services in men's column
-    if (gender === 'men' && WOMEN_ONLY.includes(service.name)) {
-      return;
-    }
-    
-    const regularPrice = service.variations[0]?.price || 0;
-    const price = gender === 'men' ? regularPrice + MENS_MARKUP : regularPrice;
+    const price = service.variations[0]?.price || 0;
     const description = service.description;
     
     html += `
