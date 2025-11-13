@@ -76,41 +76,43 @@ const apiLimiter = rateLimit({
   message: {
     error: 'Too many requests from this IP, please try again later.',
   },
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  standardHeaders: true,
+  legacyHeaders: false,
 });
 
 // Rate limiter for admin routes (prevent brute force)
 const adminLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 5, // Limit each IP to 5 requests per windowMs
-  message: `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>Too Many Attempts</title>
-      <style>
-        body {
-          font-family: Arial, sans-serif;
-          max-width: 600px;
-          margin: 100px auto;
-          padding: 20px;
-          text-align: center;
-        }
-        .error {
-          color: #d32f2f;
-        }
-      </style>
-    </head>
-    <body>
-      <h1>🚫 Too Many Attempts</h1>
-      <p class="error">Too many password attempts from your IP address.</p>
-      <p>Please try again in 15 minutes.</p>
-    </body>
-    </html>
-  `,
   standardHeaders: true,
   legacyHeaders: false,
+  handler: (req, res) => {
+    res.status(429).send(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Too Many Attempts</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+            text-align: center;
+          }
+          .error {
+            color: #d32f2f;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>🚫 Too Many Attempts</h1>
+        <p class="error">Too many password attempts from your IP address.</p>
+        <p>Please try again in 15 minutes.</p>
+      </body>
+      </html>
+    `);
+  },
 });
 
 // ===== STATIC FILES =====
