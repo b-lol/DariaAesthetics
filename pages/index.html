@@ -8,7 +8,7 @@
     <!-- this is where the xtra information goes that doesn't show up on the screen but important
      to make sure the stuff goes properly-->
 
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
     <!--this is linking the css style sheet to this document-->
 
     <title>Daria Aesthetics</title>
@@ -46,26 +46,10 @@
   <body>
     <div class="page">
       <div class="top_banner">
-        <div class="dropdown_container">
-          <button class="dropdown" onclick="toggleDropdown()">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <div class="dropdown-content" id="servicesDropdown">
-            <a href="pages/pricing_services.html">Services and Prices</a>
-            <a href="/pages/training.html">Training</a>
-            <a href="/pages/availability.html">Availability</a>
-            <a href="/pages/first_visit.html">First Visit</a>
-            <a href="/pages/skin_care.html">Skin Care</a>
-            <a href="/pages/about.html">About</a>
-            <a href="/pages/contact.html">Contact</a>
-          </div>
-        </div>
-
+        <div id="menu-container"></div>
         <div class="logocontainer">
           <img
-            src="img/DAlogo2.png"
+            src="/img/DAlogo2.png"
             class="logoImage"
             alt="DariaAesthetics logo"
           />
@@ -83,12 +67,16 @@
         </div>
       </div>
 
-      <img src = "img/mainpageHero2.jpg" class = "heroimage" alt="A collage picture with a sign that
-      says /'Yay its Waxing Day/' a picture of a girl and a waxing equipment.">
+      <img
+        src="/img/mainpageHero2.jpg"
+        class="heroimage"
+        alt="A collage picture with a sign that
+      says /'Yay its Waxing Day/' a picture of a girl and a waxing equipment."
+      />
     </div>
-    <script src="./js/script.js"></script>
+
     <!--this is linking the js file-->
   </body>
-
+  <script src="/js/script.js"></script>
   <footer></footer>
 </html>

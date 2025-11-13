@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <!-- this is telling the browser its looking at an html file-->
 
-<html lang = "en">
-
-    <head>
-        <meta charset = "UTF-8"> <!-- this is telling which characterset to use-->
-        <!-- this is where the xtra information goes that doesn't show up on the screen but important
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- this is telling which characterset to use-->
+    <!-- this is where the xtra information goes that doesn't show up on the screen but important
         to make sure the stuff goes properly-->
 
-        <link rel="stylesheet" href="../css/styles.css"/>
-        
-        <title>Training</title>
-            <!-- this shows up in the tab and in a google search -->
+    <link rel="stylesheet" href="../css/styles.css" />
 
-        <link
+    <title>Training</title>
+    <!-- this shows up in the tab and in a google search -->
+
+    <link
       rel="apple-touch-icon"
       sizes="180x180"
       href="/img/favicon_image/apple-touch-icon.png"
@@ -22,12 +22,14 @@
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="/img/favicon_image/favicon-32x32.png"/>
+      href="/img/favicon_image/favicon-32x32.png"
+    />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="/img/favicon_image/favicon-16x16.png"/>
+      href="/img/favicon_image/favicon-16x16.png"
+    />
     <link rel="manifest" href="site.webmanifest" />
     <!--This is how I select the favicon in the tabs-->
 
@@ -35,32 +37,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Updock&display=swap"
-      rel="stylesheet"/>
+      rel="stylesheet"
+    />
     <!--This is how I pulled font from google fonts there's a corresponding code in my styles sheet-->
-    </head>
+  </head>
 
+  <body>
+    <div class="page">
+      <div class="top_banner">
+        <div id="menu-container"></div>
 
-    <body>
-        <div class="page">
-    <div class="top_banner">
-      <div class = "dropdown_container">
-      <button class ="dropdown" onclick="toggleDropdown()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="dropdown-content" id="servicesDropdown">
-        <a href="/index.html">Home</a>
-        <a href="/pages/pricing_services.html">Services and Prices</a>
-        <a href="/pages/availability.html">Availability</a>
-        <a href="/pages/first_visit.html">First Visit</a>
-        <a href="/pages/skin_care.html">Skin Care</a>
-        <a href="/pages/about.html">About</a>
-        <a href="/pages/contact.html">Contact</a>
-    </div>
-      </div>
-
-      <div class="logocontainer">
+        <div class="logocontainer">
           <img
             src="../img/DAlogo2.png"
             class="logoImage"
@@ -69,14 +56,19 @@
           <div class="logo">Daria Aesthetics</div>
         </div>
 
-
-      <div class="button_container">
-        <a href="https://book.squareup.com/appointments/m3f3pdzzxv89y4/location/L8YJN97A2A889/services?fbclid=PAb21jcANx-SFleHRuA2FlbQIxMAABpxxA6OyYUd1E3Jr-KQ2EOXSF18-lqARcRTQa-zbOEiDSjn4-EcmyQ1J9XAoI_aem_t0ZKJ7OH0j-WcqFb1MC4Bg" class = "booking_button" target="_blank" rel="noopener">Book My Appointment</a>
-
+        <div class="button_container">
+          <a
+            href="https://book.squareup.com/appointments/m3f3pdzzxv89y4/location/L8YJN97A2A889/services?fbclid=PAb21jcANx-SFleHRuA2FlbQIxMAABpxxA6OyYUd1E3Jr-KQ2EOXSF18-lqARcRTQa-zbOEiDSjn4-EcmyQ1J9XAoI_aem_t0ZKJ7OH0j-WcqFb1MC4Bg"
+            class="booking_button"
+            target="_blank"
+            rel="noopener"
+            >Book My Appointment</a
+          >
         </div>
-    </div><!--End of top banner--> 
-           <script src="../js/script.js"></script>
+      </div>
+      <!--End of top banner-->
+    </div>
     <!--this is linking the js file-->
-    </body>
-<script src="../js/script.js"></script>
+  </body>
+  <script src="/js/script.js"></script>
 </html>

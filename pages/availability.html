@@ -48,22 +48,7 @@
   <body>
     <div class="page">
       <div class="top_banner">
-        <div class="dropdown_container">
-          <button class="dropdown" onclick="toggleDropdown()">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <div class="dropdown-content" id="servicesDropdown">
-            <a href="/index.html">Home</a>
-            <a href="/pages/pricing_services.html">Services and Prices</a>
-            <a href="/pages/training.html">Training</a>
-            <a href="/pages/first_visit.html">First Visit</a>
-            <a href="/pages/skin_care.html">Skin Care</a>
-            <a href="/pages/about.html">About</a>
-            <a href="/pages/contact.html">Contact</a>
-          </div>
-        </div>
+        <div id="menu-container"></div>
 
         <div class="logocontainer">
           <img
@@ -93,22 +78,9 @@
           <div class="loading">Loading calendar...</div>
         </div>
       </div>
-
-      <div class="weekly_schedule" id="studio-schedule" aria-live="polite">
-        <div class="ws-header">
-          <h2 class="ws-title">My studio hours</h2>
-          <span class="ws-badge" id="ws-status">Checking…</span>
-        </div>
-
-        <p class="ws-sub" id="ws-subline"></p>
-
-        <ul class="ws-list" id="ws-list">
-          <!-- filled by JS -->
-        </ul>
-      </div>
     </div>
   </body>
-  <script src="../js/script.js"></script>
-  <script src="../js/calendar.js"></script>
+  <script src="/js/script.js"></script>
+  <script src="/js/calendar.js"></script>
   <!--this is linking the js file-->
 </html>

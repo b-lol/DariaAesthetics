@@ -18,3 +18,17 @@ window.onclick = function(event) {
     }
 }
 
+// Load menu component on every page
+document.addEventListener('DOMContentLoaded', function() {
+  const menuContainer = document.getElementById('menu-container');
+  
+  if (menuContainer) {
+    fetch('/components/menu.html')
+      .then(response => response.text())
+      .then(html => {
+        menuContainer.innerHTML = html;
+      })
+      .catch(error => console.error('Error loading menu:', error));
+  }
+});
+
