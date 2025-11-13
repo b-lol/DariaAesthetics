@@ -14,7 +14,7 @@
   max-width: 1200px;
   margin: 40px auto;
   padding: 30px;
-  background: rgb(248, 222, 225);
+  background: var(--background-color);
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -142,7 +142,7 @@
 }
 
 .event-indicator.available {
-  background: var(--primary-pink);
+  background: var(--text-color);
   color: white;
 }
 
@@ -193,8 +193,8 @@ weekly_schedule{
 
 .weekly_schedule{
   color: var(--text-color);
-  background: var(--box-color);
-  border: 1.5px solid var(--primary-pink);
+  background: var(--background-color);
+  border: 1.5px solid var(--text-color);
   border-radius: 12px;
   padding: clamp(12px, 2.5vw, 28px);
   font-size: clamp(16px, 3vw, 36px);
@@ -266,7 +266,7 @@ weekly_schedule{
 
 .ws-today .ws-day,
 .ws-today .ws-time{
-  background: color-mix(in srgb, var(--primary-pink) 12%, white);
+  background: color-mix(in srgb, var(--text-color) 12%, white);
   padding: .1em .35em;
   border-radius: 8px;
 }

@@ -62,14 +62,14 @@ function renderCalendar(data) {
   // Add bookings to calendar
   bookings.forEach(booking => {
     const date = new Date(booking.start_at);
-    const dateKey = date.toISOString().split('T')[0]; // YYYY-MM-DD
+    const dateKey = date.toLocaleDateString('en-CA', { timeZone: 'America/Vancouver' }); // YYYY-MM-DD in Pacific time
     
     if (!calendarData[dateKey]) {
       calendarData[dateKey] = { bookings: [], availabilities: [] };
     }
     
     calendarData[dateKey].bookings.push({
-      time: date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }),
+      time: date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Vancouver' }),
       duration: booking.appointment_segments.reduce((sum, seg) => sum + seg.duration_minutes, 0)
     });
   });
@@ -77,39 +77,21 @@ function renderCalendar(data) {
   // Add availabilities to calendar
   availabilities.forEach(availability => {
     const date = new Date(availability.start_at);
-    const dateKey = date.toISOString().split('T')[0]; // YYYY-MM-DD
+    const dateKey = date.toLocaleDateString('en-CA', { timeZone: 'America/Vancouver' }); // YYYY-MM-DD in Pacific time
     
     if (!calendarData[dateKey]) {
       calendarData[dateKey] = { bookings: [], availabilities: [] };
     }
     
     calendarData[dateKey].availabilities.push({
-      time: date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }),
+      time: date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Vancouver' }),
       duration: availability.appointment_segments[0]?.duration_minutes || 60
     });
   });
   
-  // Get current month and year
+  // Build calendar HTML for next 4 weeks (28 days) starting from today
   const today = new Date();
-  const currentMonth = today.getMonth();
-  const currentYear = today.getFullYear();
-  
-  // Build calendar HTML
-  let calendarHTML = buildMonthCalendar(currentYear, currentMonth, calendarData);
-  
-  // Add summary (incase you want to have a summary)
-//   const summary = `
-//     <div class="calendar-summary">
-//       <div class="summary-item">
-//         <span class="summary-label">🗓️ Booked Appointments:</span>
-//         <span class="summary-value">${bookings.length}</span>
-//       </div>
-//       <div class="summary-item">
-//         <span class="summary-label">⏰ Available Slots:</span>
-//         <span class="summary-value">${availabilities.length}</span>
-//       </div>
-//     </div>
-//   `;
+  let calendarHTML = buildRollingCalendar(today, 28, calendarData);
   
   container.innerHTML = calendarHTML;
 }
@@ -158,6 +140,84 @@ function buildMonthCalendar(year, month, calendarData) {
     html += `
       <div class="calendar-day ${todayClass}">
         <div class="day-number">${day}</div>
+        <div class="day-events">
+    `;
+    
+    // Show bookings count
+    if (dayData.bookings.length > 0) {
+      html += `<div class="event-indicator busy">${dayData.bookings.length} booked</div>`;
+    }
+    
+    // Show availability count
+    if (dayData.availabilities.length > 0) {
+      html += `<div class="event-indicator available">${dayData.availabilities.length} available</div>`;
+    }
+    
+    html += `
+        </div>
+      </div>
+    `;
+  }
+  
+  html += `
+      </div>
+    </div>
+  `;
+  
+  return html;
+}
+
+// Function to build a rolling calendar (shows next X days starting from startDate)
+function buildRollingCalendar(startDate, numDays, calendarData) {
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                     'July', 'August', 'September', 'October', 'November', 'December'];
+  
+  // Calculate end date
+  const endDate = new Date(startDate);
+  endDate.setDate(endDate.getDate() + numDays - 1);
+  
+  let html = `
+    <div class="calendar-month">
+      <div class="month-header">
+        Next ${numDays} Days (${monthNames[startDate.getMonth()]} ${startDate.getDate()} - ${monthNames[endDate.getMonth()]} ${endDate.getDate()})
+      </div>
+      
+      <div class="calendar-grid">
+        <!-- Day headers -->
+        <div class="day-name">Sun</div>
+        <div class="day-name">Mon</div>
+        <div class="day-name">Tue</div>
+        <div class="day-name">Wed</div>
+        <div class="day-name">Thu</div>
+        <div class="day-name">Fri</div>
+        <div class="day-name">Sat</div>
+  `;
+  
+  // Get the starting day of the week for alignment
+  const startingDayOfWeek = startDate.getDay(); // 0 = Sunday
+  
+  // Add empty cells to align the first day properly
+  for (let i = 0; i < startingDayOfWeek; i++) {
+    html += '<div class="calendar-day empty"></div>';
+  }
+  
+  // Add each day for the next numDays
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Reset time for accurate comparison
+  
+  for (let dayOffset = 0; dayOffset < numDays; dayOffset++) {
+    const currentDate = new Date(startDate);
+    currentDate.setDate(currentDate.getDate() + dayOffset);
+    
+    const dateKey = currentDate.toISOString().split('T')[0];
+    const dayData = calendarData[dateKey] || { bookings: [], availabilities: [] };
+    
+    const isToday = currentDate.toDateString() === today.toDateString();
+    const todayClass = isToday ? 'today' : '';
+    
+    html += `
+      <div class="calendar-day ${todayClass}">
+        <div class="day-number">${currentDate.getDate()}</div>
         <div class="day-events">
     `;
     

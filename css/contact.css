@@ -16,7 +16,7 @@ body {
 .contact_title {
     font-family: "Montserrat", sans-serif;
     font-size: clamp(12px, 5vw, 28px);
-    color: var(--primary-pink);
+    color: var(--text-color);
     text-align: center;
     margin-bottom: 20px;
     font-weight: 600;
@@ -38,7 +38,7 @@ body {
 }
 
 .contact_card {
-    background-color: var(--box-color);
+    background-color: var(--background-color);
     padding: 30px;
     border-radius: 15px;
     text-align: center;
@@ -53,14 +53,14 @@ body {
 
 .contact_card_icon {
     font-size: clamp(32px, 5vw, 48px);
-    color: var(--primary-pink);
+    color: var(--text-color);
     margin-bottom: 15px;
 }
 
 .contact_card_title {
     font-family: "Montserrat", sans-serif;
     font-size: clamp(18px, 2.5vw, 24px);
-    color: var(--primary-pink);
+    color: var(--text-color);
     margin-bottom: 15px;
     font-weight: 600;
 }
@@ -72,20 +72,19 @@ body {
 }
 
 .contact_card_info a {
-    color: var(--text-color);
+    color: white;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .contact_card_info a:hover {
-    color: var(--primary-pink);
     text-decoration: underline;
 }
 
 .social_link {
     display: inline-block;
     padding: 12px 30px;
-    background-color: var(--primary-pink);
+    background-color: var(--text-color);
     color: white;
     text-decoration: none;
     border-radius: 25px;
@@ -96,7 +95,7 @@ body {
 }
 
 .social_link:hover {
-    background-color: #d66ba0;
+    background-color:var(--text-color);
     transform: scale(1.05);
 }
 
@@ -108,7 +107,7 @@ body {
 .map_title {
     font-family: "Montserrat", sans-serif;
     font-size: clamp(22px, 3.5vw, 32px);
-    color: var(--primary-pink);
+    color: var(--text-color);
     text-align: center;
     margin-bottom: 30px;
     font-weight: 600;
@@ -134,7 +133,7 @@ body {
 }
 
 .hours_section {
-    background-color: var(--box-color);
+    background-color: var(--background-color);
     padding: 40px;
     border-radius: 15px;
     margin-top: 50px;
@@ -144,7 +143,7 @@ body {
 .hours_title {
     font-family: "Montserrat", sans-serif;
     font-size: clamp(22px, 3.5vw, 32px);
-    color: var(--primary-pink);
+    color: var(--text-color);
     margin-bottom: 25px;
     font-weight: 600;
 }

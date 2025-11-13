@@ -35,7 +35,7 @@
   text-align: center;
   margin-bottom: 30px;
   padding-bottom: 15px;
-  border-bottom: 3px solid var(--primary-pink);
+  border-bottom: 3px solid var(--text-color);
 }
 
 /* Two Column Layout */
@@ -47,7 +47,7 @@
 }
 
 .services-column {
-  background: var(--box-color);
+  background: var(--background-color);
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -59,7 +59,7 @@
   color: var(--text-color);
   margin-bottom: 25px;
   padding-bottom: 10px;
-  border-bottom: 2px solid var(--primary-pink);
+  border-bottom: 2px solid var(--text-color);
 }
 
 /* Service Item */

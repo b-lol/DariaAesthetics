@@ -16,7 +16,7 @@ body {
 .aftercare_title {
     font-family: "Montserrat", sans-serif;
     font-size: clamp(24px, 4vw, 42px);
-    color: var(--primary-pink);
+    color: var(--text-color);
     text-align: center;
     margin-bottom: 30px;
     font-weight: 600;
@@ -34,11 +34,11 @@ body {
 .section_title {
     font-family: "Montserrat", sans-serif;
     font-size: clamp(20px, 3vw, 28px);
-    color: var(--primary-pink);
+    color: var(--text-color);
     margin-top: 40px;
     margin-bottom: 20px;
     font-weight: 500;
-    border-bottom: 2px solid var(--primary-pink);
+    border-bottom: 2px solid var(--text-color);
     padding-bottom: 10px;
 }
 
@@ -53,7 +53,7 @@ body {
 
 .instruction_box {
     background-color: white;
-    border-left: 4px solid var(--primary-pink);
+    border-left: 4px solid var(--text-color);
     padding: 15px 20px;
     margin-bottom: 15px;
     border-radius: 5px;
@@ -61,19 +61,19 @@ body {
 }
 
 .instruction_box strong {
-    color: var(--primary-pink);
+    color: var(--text-color);
 }
 
 .warning_box {
     background-color: #fff5f5;
-    border: 2px solid var(--primary-pink);
+    border: 2px solid var(--text-color);
     padding: 20px;
     border-radius: 10px;
     margin: 30px 0;
 }
 
 .warning_box h3 {
-    color: var(--primary-pink);
+    color: var(--text-color);
     margin-top: 0;
     font-family: "Montserrat", sans-serif;
 }
@@ -86,7 +86,7 @@ body {
 }
 
 .tip_box h3 {
-    color: var(--primary-pink);
+    color: var(--text-color);
     margin-top: 0;
     font-family: "Montserrat", sans-serif;
 }
@@ -104,7 +104,7 @@ li {
 
 li:before {
     content: "✓";
-    color: var(--primary-pink);
+    color: var(--text-color);
     font-weight: bold;
     position: absolute;
     left: 0;
