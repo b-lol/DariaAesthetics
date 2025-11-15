@@ -13,11 +13,8 @@ RUN cd backend && npm install
 # Copy entire project (includes pages, css, js, img, components, backend)
 COPY . .
 
-# Set working directory to backend for running the server
-WORKDIR /app/backend
-
 # Expose port (Railway will override with its own PORT)
 EXPOSE 8080
 
-# Start the server
-CMD ["node", "server.js"]
+# Start the server from /app directory
+CMD ["node", "backend/server.js"]
