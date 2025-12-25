@@ -101,17 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //JS for the weekly schedule:
 /* ===== Weekly Schedule (Vancouver TZ) ===== */
 (function () {
-  // ---- CONFIG: set your hours here ----
-  // 0 = Sun ... 6 = Sat. Use 24h "HH:MM-HH:MM". Multiple ranges supported.
-  const SCHEDULE = {
-    0: [], // Sunday
-    1: ["18:30-21:00"], // Monday
-    2: ["10:00-19:00"], // Tuesday
-    3: [], // Wednesday
-    4: ["18:30-21:00"], // Thursday
-    5: [], // Friday
-    6: ["10:00-19:00"], // Saturday
-  };
+
 
   // Fixed studio timezone (IANA name). Change if needed.
   const TIMEZONE = "America/Vancouver";
@@ -129,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Expose a tiny API in case you want to tweak at runtime
   window.StudioSchedule = {
     setSchedule(newSched) {
-      Object.assign(SCHEDULE, newSched);
+      Object.assign(STUDIO_SCHEDULE, newSched);
       refreshAll();
     },
     getStatus() {
@@ -159,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return fmt12h(parseHM(hm));
   }
   function intervalsForDay(dayIdx) {
-    return (SCHEDULE[dayIdx] || []).map((r) => {
+    return (STUDIO_SCHEDULE[dayIdx] || []).map((r) => {
       const [a, b] = r.split("-");
       return [parseHM(a), parseHM(b)];
     });
@@ -205,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const today = nowInTZ().day;
 
     for (let i = 0; i < 7; i++) {
-      const hours = SCHEDULE[i];
+      const hours = STUDIO_SCHEDULE[i];
       const dayCell = document.createElement("li");
       const timeCell = document.createElement("li");
 

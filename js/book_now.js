@@ -175,7 +175,7 @@ function buildWeekView(startDate, calendarData) {
       <div class="day-name">${dayName}</div>
     </div>
     <div class="time-slots">
-      ${renderTimeSlots(dayData)}
+      ${renderTimeSlots(dayData, date.getDay())}
     </div>
   </div>
 `;
@@ -190,14 +190,12 @@ function buildWeekView(startDate, calendarData) {
 }
 
 // Function to render hourly time slots for a day
-function renderTimeSlots(dayData) {
-  // DEBUG: See what data we have
-  console.log("Day data:", dayData);
-  console.log("Availabilities count:", dayData.availabilities.length);
-  console.log("Bookings count:", dayData.bookings.length);
-
-  // Check if the studio is closed (no availability AND no bookings)
-  if (dayData.availabilities.length === 0 && dayData.bookings.length === 0) {
+function renderTimeSlots(dayData, dayIndex) {
+  // Get the actual hours for this day from the shared schedule
+  const dayHours = getDayHours(dayIndex);
+  
+  // Check if the studio is closed this day
+  if (!dayHours) {
     return `
       <div class="studio-closed">
         <span class="closed-icon">🚫</span>
@@ -206,9 +204,8 @@ function renderTimeSlots(dayData) {
     `;
   }
 
-  // Create time slots from 9 AM to 9 PM (business hours)
-  const startHour = 9;
-  const endHour = 21;
+  const startHour = dayHours.start;
+  const endHour = dayHours.end;
 
   let html = "";
 
